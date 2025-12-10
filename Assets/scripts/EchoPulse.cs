@@ -52,7 +52,6 @@ public class EchoPulse : MonoBehaviour
 
         currentDistance += Time.deltaTime * pulseSpeed;
         Shader.SetGlobalFloat("_PulseDistance", currentDistance);
-
         // Criação da variavel que guarda a distancia entre a origem do som e o jogador(para limitar a onda de som)
         float distToPlayer = Vector3.Distance(pulseOrigin, player.position);
 
@@ -61,7 +60,7 @@ public class EchoPulse : MonoBehaviour
 
         // Adicionar uma margem de segurança (Buffer) à distância máxima.
         // Isto garante que a onda de som se afasta o suficiente de todos os objetos atingidos.
-        float stopBuffer = 10f;
+        float stopBuffer = 20f;
 
         if (currentDistance >= maxDistance + stopBuffer)
         {

@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Limit
-  m_Shader: {fileID: -6465566751694194690, guid: 7975a2b83e27105409744c0781ca2f89, type: 3}
+  m_Name: Limits
+  m_Shader: {fileID: -6465566751694194690, guid: 6bab837518c1c1043bb3185835c2e37d, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -96,6 +96,7 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _DstBlendAlpha: 0
+    - _EchoIntensity: 6
     - _EchoVisibility: 0
     - _EnvironmentReflections: 1
     - _Float: 6
