@@ -1,29 +1,55 @@
-using UnityEngine;
-using UnityEngine.InputSystem;
+ï»¿using UnityEngine;
+using UnityEngine.InputSystem; // se estiveres a usar o novo Input System
 
+[RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
 {
-    public float moveSpeed;
-    public float maxSpeed;
-    public float jumpForce;
+    [Header("Stealth / Crouch")]
+    public bool isCrouching = false;
+    public float crouchSpeedMultiplier = 0.4f; // andar devagar
+    public KeyCode crouchKey = KeyCode.LeftControl;
+
+    [Header("Movement")]
+    public float moveSpeed = 5f;
+    public float maxSpeed = 5f;
+    public float jumpForce = 5f;
     public float groundCheckRadius = 0.5f;
-    public float horizontalInput;
-    private bool isGrounded;
     public Transform groundCheck;
     public LayerMask groundLayer;
-    private Rigidbody rb;
+
+    [Header("Camera")]
     public Camera cam;
 
-    private void Awake()
+    [Header("Footsteps / Echo")]
+    public AudioSource footstepsSource;     // AudioSource com o clip longo dos passos (Loop ON, PlayOnAwake OFF)
+    public EchoSoundEmitter echoEmitter;   // script de eco ligado ao mesmo objeto / mesma fonte
+    public PlayerFootsteps footsteps;      // script que avisa a IA (OverlapSphere)
+    public float footstepInterval = 0.35f; // intervalo para eventos de eco para a IA
+
+    float horizontalInput;
+    bool isGrounded;
+    Rigidbody rb;
+    float footstepTimer = 0f;
+    bool wasWalking = false;
+
+    void Awake()
     {
         rb = GetComponent<Rigidbody>();
         rb.rotation = transform.rotation;
+
+        if (footstepsSource == null)
+            footstepsSource = GetComponent<AudioSource>();
+
+        if (echoEmitter == null)
+            echoEmitter = GetComponent<EchoSoundEmitter>();
     }
+
     void Start()
     {
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Locked;
     }
+
     void Update()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -31,7 +57,7 @@ public class PlayerController : MonoBehaviour
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
 
-        // direções da câmara no plano XZ
+        // direï¿½ï¿½es da cï¿½mara no plano XZ
         Vector3 camForward = cam.transform.forward;
         camForward.y = 0f;
         camForward.Normalize();
@@ -40,21 +66,69 @@ public class PlayerController : MonoBehaviour
         camRight.y = 0f;
         camRight.Normalize();
 
-        // direção desejada de movimento em relação à câmara
+        // direï¿½ï¿½o desejada de movimento em relaï¿½ï¿½o ï¿½ cï¿½mara
         Vector3 moveDir = camForward * v + camRight * h;
         if (moveDir.sqrMagnitude > 1f) moveDir.Normalize();
 
-        // mover com Rigidbody (recomendado) OU Translate
-        Vector3 move = moveDir * moveSpeed * dt;
+        float currentSpeed = isCrouching ? moveSpeed * crouchSpeedMultiplier : moveSpeed;
+        Vector3 move = moveDir * currentSpeed * dt;
         transform.Translate(move, Space.World);
 
-        if (isGrounded && Input.GetButtonDown("Jump")) Jump();
+        bool isMoving = moveDir.sqrMagnitude > 0.001f && isGrounded && !isCrouching;
 
+
+        // SOM DE PASSOS (fonte principal, loop)
+        if (isMoving)
+        {
+            if (footstepsSource != null && !footstepsSource.isPlaying)
+                footstepsSource.Play();
+        }
+        else
+        {
+            if (footstepsSource != null && footstepsSource.isPlaying)
+                footstepsSource.Stop();
+        }
+
+        // Eco para o inimigo ouvir (PlayerFootsteps) ï¿½ mantï¿½m o teu sistema de eventos
+        if (isMoving)
+        {
+            footstepTimer += dt;
+            if (footstepTimer >= footstepInterval)
+            {
+                if (footsteps != null)
+                    footsteps.PlayFootstep();
+
+                footstepTimer = 0f;
+            }
+        }
+        else
+        {
+            footstepTimer = 0f;
+        }
+
+
+        // TRANSIï¿½ï¿½O ANDAR -> PARAR: disparar eco contï¿½nuo (se usares o EchoSoundEmitter por objeto)
+        if (!isMoving && wasWalking && echoEmitter != null)
+        {
+            // diz ao emissor de eco para continuar o som a partir da posiï¿½ï¿½o atual
+            echoEmitter.StartEchoFromMain();
+        }
+
+        wasWalking = isMoving;
+
+        if (isGrounded && Input.GetButtonDown("Jump"))
+            Jump();
+
+        // Input para agachar
+        isCrouching = Input.GetKey(crouchKey);
     }
 
-    private void FixedUpdate()
+    void FixedUpdate()
     {
+        // verificaï¿½ï¿½o de chï¿½o
         isGrounded = Physics.Raycast(transform.position, Vector3.down, 1.1f, groundLayer);
+
+        // se estiveres realmente a usar esta parte de fï¿½sica no eixo X:
         Vector3 velocity = rb.linearVelocity;
         float targetVelX = horizontalInput * moveSpeed;
         float newVelX = Mathf.MoveTowards(velocity.x, targetVelX, 50f * Time.fixedDeltaTime);

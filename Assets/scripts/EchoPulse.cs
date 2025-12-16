@@ -6,8 +6,6 @@ using UnityEngine;
 */
 public class EchoPulse : MonoBehaviour
 {
-    [Header("Shader Material")]
-    public Material EchoMaterial; // Material do shader da onda(textura)
 
     [Header("Player Hearing")]
     public Transform player; // Jogador
@@ -23,13 +21,7 @@ public class EchoPulse : MonoBehaviour
 
     void Start()
     {
-        // Se não houver material mostra-se uma mensagem no log e disabilita a atualização da script(porque não dá para criar esta onda de som sem um material do shader)
-        if (EchoMaterial == null)
-        {
-            Debug.LogError("EchoPulse: Nenhum material atribuído!");
-            enabled = false; // Desabilitar atualização da script
-            return;
-        }
+
     }
 
     public void StartPulse(Vector3 position) // Metodo que cria da onda de som apartir do ponto de colisão entre o objeto e o mapa
@@ -52,6 +44,7 @@ public class EchoPulse : MonoBehaviour
 
         currentDistance += Time.deltaTime * pulseSpeed;
         Shader.SetGlobalFloat("_PulseDistance", currentDistance);
+
         // Criação da variavel que guarda a distancia entre a origem do som e o jogador(para limitar a onda de som)
         float distToPlayer = Vector3.Distance(pulseOrigin, player.position);
 
