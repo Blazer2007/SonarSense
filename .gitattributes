@@ -1,16 +1,2 @@
-# --- Git LFS ---
-
-# Textures
-*.png filter=lfs diff=lfs merge=lfs -text
-*.jpg filter=lfs diff=lfs merge=lfs -text
-*.jpeg filter=lfs diff=lfs merge=lfs -text
 *.tga filter=lfs diff=lfs merge=lfs -text
 *.psd filter=lfs diff=lfs merge=lfs -text
-
-# Large binaries
-*.dll filter=lfs diff=lfs merge=lfs -text
-*.exe filter=lfs diff=lfs merge=lfs -text
-
-# Unity packages
-*.unitypackage filter=lfs diff=lfs merge=lfs -text
-* text=auto
