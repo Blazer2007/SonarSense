@@ -76,6 +76,8 @@ public class PlayerController : MonoBehaviour
 
         bool isMoving = moveDir.sqrMagnitude > 0.001f && isGrounded && !isCrouching;
 
+        if (echoEmitter != null)
+            echoEmitter.UpdatePlayingState(isMoving);
 
         // SOM DE PASSOS (fonte principal, loop)
         if (isMoving)
@@ -104,14 +106,6 @@ public class PlayerController : MonoBehaviour
         else
         {
             footstepTimer = 0f;
-        }
-
-
-        // TRANSI��O ANDAR -> PARAR: disparar eco cont�nuo (se usares o EchoSoundEmitter por objeto)
-        if (!isMoving && wasWalking && echoEmitter != null)
-        {
-            // diz ao emissor de eco para continuar o som a partir da posi��o atual
-            echoEmitter.StartEchoFromMain();
         }
 
         wasWalking = isMoving;

@@ -1,17 +1,19 @@
+﻿using System.Collections;
 using UnityEngine;
-using System.Collections;
 
-[RequireComponent(typeof(AudioSource))]
 public class EchoSoundEmitter : MonoBehaviour
 {
-    public AudioSource mainSource;   // fonte principal do som
-    public AudioSource echoSource;   // fonte do eco
-    public float echoVolume = 0.3f;
-    public float echoFadeTime = 2f;
-    public AudioClip pickupSound;    // som ao pegar
-    public AudioClip throwSound;     // som ao arremessar
+    public AudioSource mainSource;   // som principal
+    public AudioSource echoSource;   // eco
 
-    private bool wasPlaying;
+    public float echoVolume = 0.5f;
+    public int echoRepeats = 3;
+    public float echoDelay = 1f;
+    public float echoClipDuration = 1f;
+
+    bool wasPlaying = false;
+    bool echoActive = false;
+    float lastSecondStartTime = 0f;
 
     void Awake()
     {
@@ -25,63 +27,77 @@ public class EchoSoundEmitter : MonoBehaviour
         }
     }
 
-    void Update()
+    // GENÉRICO: qualquer objeto chama isto com "true = está a emitir som"
+    public void UpdatePlayingState(bool isPlaying)
     {
-        bool isPlaying = mainSource.isPlaying;
+        // Estado "a tocar som principal"
+        if (isPlaying)
+        {
+            if (!mainSource.isPlaying)
+                mainSource.Play();
 
-        // transi��o "a tocar" -> "parou"
-        Debug.Log("isplaying" + isPlaying);
-        Debug.Log("wasplaying" + wasPlaying);
-        if (!isPlaying && wasPlaying)
-            StartEchoFromMain();
+            if (echoActive)
+            {
+                StopAllCoroutines();
+                echoSource.Stop();
+                echoActive = false;
+            }
+        }
+        else
+        {
+            // transição: estava a tocar e agora parou → dispara eco
+            if (wasPlaying)
+            {
+                if (mainSource.isPlaying)
+                    mainSource.Stop();
+
+                StartEcho();
+            }
+        }
 
         wasPlaying = isPlaying;
-        
     }
 
-    public void StartEchoFromMain()
+    void StartEcho()
     {
-        if (mainSource.clip == null) return;
+        if (mainSource == null || mainSource.clip == null)
+            return;
 
         echoSource.clip = mainSource.clip;
-        echoSource.time = mainSource.time;
-        echoSource.volume = echoVolume;
         echoSource.loop = false;
-        echoSource.Play();
+
+        float currentTime = mainSource.time;
+        float clipLength = mainSource.clip.length;
+        lastSecondStartTime = Mathf.Max(0f, currentTime - 1f);
+
         StopAllCoroutines();
-        StartCoroutine(FadeOutEcho());
+        StartCoroutine(PlayEchoRepeats());
     }
 
-    IEnumerator FadeOutEcho()
+    IEnumerator PlayEchoRepeats()
     {
-        float startVolume = echoSource.volume;
-        float elapsed = 0f;
+        echoActive = true;
+        float baseVolume = echoVolume;
 
-        while (elapsed < echoFadeTime)
+        for (int i = 0; i < echoRepeats; i++)
         {
-            elapsed += Time.deltaTime;
-            echoSource.volume = Mathf.Lerp(startVolume, 0f, elapsed / echoFadeTime);
-            yield return null;
+            echoSource.volume = baseVolume / Mathf.Pow(2f, i);
+
+            echoSource.time = lastSecondStartTime;
+            echoSource.Play();
+
+            float remaining = echoSource.clip.length - lastSecondStartTime;
+            float duration = Mathf.Min(echoClipDuration, remaining);
+
+            yield return new WaitForSeconds(duration);
+
+            echoSource.Stop();
+
+            if (i < echoRepeats - 1)
+                yield return new WaitForSeconds(echoDelay);
         }
 
         echoSource.Stop();
-        echoSource.volume = startVolume;
-    }
-
-    // M�todos de pegar e arremessar
-    public void OnPickedUp()
-    {
-        if (pickupSound != null)
-            AudioSource.PlayClipAtPoint(pickupSound, transform.position);
-    }
-
-    public void OnThrown()
-    {
-        if (throwSound != null)
-            AudioSource.PlayClipAtPoint(throwSound, transform.position);
-
-        if (echoSource != null)
-            StartEchoFromMain();
-
+        echoActive = false;
     }
 }

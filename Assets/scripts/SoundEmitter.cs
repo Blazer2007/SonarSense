@@ -7,10 +7,14 @@ public class SoundEmitter : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        // se está na mão, ignorar TODAS as colisões
+        // Ignorar colisões com o jogador
+        if (collision.gameObject.CompareTag("Player") || collision.gameObject.GetComponent<PlayerController>() != null)
+            return;
+
+        // Se está na mão, ignorar TODAS as colisões
         if (inHand) return;
 
-        // se já emitiu neste lançamento, não emitir outra vez
+        // Se já emitiu neste lançamento, não emitir outra vez
         if (triggered) return;
 
         triggered = true;
@@ -19,6 +23,7 @@ public class SoundEmitter : MonoBehaviour
         if (pulse != null)
             pulse.StartPulse(transform.position);
     }
+
 
     // chamado quando o jogador pega no objeto
     public void OnPickedUp()

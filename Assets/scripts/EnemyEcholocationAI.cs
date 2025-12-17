@@ -22,7 +22,7 @@ public class EnemyEcholocationAI : MonoBehaviour
     Transform player;
     float wanderTimer;
     public float losePlayerDistance = 10f; // distância a partir da qual o inimigo desiste de perseguir o jogador
-    public float chasepeed = 5.0f;
+    public float chasepeed = 6f;
 
 
     void Start()
@@ -41,6 +41,7 @@ public class EnemyEcholocationAI : MonoBehaviour
         switch (state)
         {
             case EnemyState.Wander:
+                enemy.speed = 3.5f; // Reduz a velocidade ao perder o jogador
                 if (!enemy.pathPending &&
                     enemy.remainingDistance <= enemy.stoppingDistance &&
                     (!enemy.hasPath || enemy.velocity.sqrMagnitude < 0.01f))
@@ -56,6 +57,7 @@ public class EnemyEcholocationAI : MonoBehaviour
                 break;
 
             case EnemyState.InvestigateSound:
+                enemy.speed = 3.5f; // Reduz a velocidade ao perder o jogador
                 if (!enemy.pathPending && enemy.remainingDistance <= enemy.stoppingDistance)
                 {
                     state = EnemyState.Wander;
@@ -68,7 +70,7 @@ public class EnemyEcholocationAI : MonoBehaviour
                 if (player != null)
                 {
                     enemy.SetDestination(player.position);
-                    enemy.speed = chasepeed;
+                    enemy.speed = chasepeed; // Aumenta a velocidade ao perseguir o jogador
 
                     float distToPlayer = Vector3.Distance(transform.position, player.position);
 
@@ -80,10 +82,10 @@ public class EnemyEcholocationAI : MonoBehaviour
                         wanderTimer = 0f;
                         SetRandomDestination();
                     }
+                    
                 }
                 else
                 {
-                    enemy.speed = 500f;
                     state = EnemyState.Wander;
                     wanderTimer = 0f;
                     SetRandomDestination();
@@ -105,7 +107,7 @@ public class EnemyEcholocationAI : MonoBehaviour
         {
             enemy.SetDestination(hit.position);
         }
-        Debug.Log("a andar"); //andar aleatóriamente e parar de andar depois de 3 segundos, andar mais rapido quando pressegue o jogador
+        //andar aleatóriamente e parar de andar depois de 3 segundos, andar mais rapido quando pressegue o jogador
     }
 
     public void HearCollision(Vector3 soundPos, float volume)
@@ -116,7 +118,6 @@ public class EnemyEcholocationAI : MonoBehaviour
         lastHeardPosition = soundPos;
         state = EnemyState.InvestigateSound;
         enemy.SetDestination(lastHeardPosition);
-        Debug.Log("a investigar");
     }
 
     public void HearFootstep(Vector3 soundPos, Transform soundSource)
@@ -126,6 +127,5 @@ public class EnemyEcholocationAI : MonoBehaviour
 
             player = soundSource;
             state = EnemyState.ChasePlayer;
-            Debug.Log("a perseguir");
     }
 }
