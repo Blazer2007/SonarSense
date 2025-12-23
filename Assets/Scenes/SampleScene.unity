@@ -2139,10 +2139,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainSource: {fileID: 1670313633}
   echoSource: {fileID: 1670313633}
-  echoVolume: 0.5
-  echoRepeats: 3
-  echoDelay: 0.3
-  echoClipDuration: 0.5
+  echoVolume: 0.8
+  echoRepeats: 4
+  echoDelay: 0.2
+  echoClipDuration: 0.7
 --- !u!1 &1702526093
 GameObject:
   m_ObjectHideFlags: 0

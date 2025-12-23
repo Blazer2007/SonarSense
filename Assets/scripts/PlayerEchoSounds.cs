@@ -9,9 +9,9 @@ public class PlayerEchoSounds : MonoBehaviour
 
     [Header("Parâmetros de Eco")]
     [Range(0f, 1f)]
-    public float echoVolume = 0.5f;
+    public float echoVolume = 0.8f;
     public int echoRepeats = 3;
-    public float echoDelay = 0.3f;
+    public float echoDelay = 0.2f;
     public float echoClipDuration = 1f;
 
     bool wasPlaying = false;
@@ -44,6 +44,7 @@ public class PlayerEchoSounds : MonoBehaviour
         // Se está a tocar
         if (isPlaying)
         {
+            mainSource.volume = 1f;
             if (!mainSource.isPlaying)
                 mainSource.Play();
 
@@ -58,10 +59,10 @@ public class PlayerEchoSounds : MonoBehaviour
         {
             if (wasPlaying)
             {
+                StartEcho();
+
                 if (mainSource.isPlaying)
                     mainSource.Stop();
-
-                StartEcho();
             }
         }
 
@@ -78,7 +79,8 @@ public class PlayerEchoSounds : MonoBehaviour
 
         float currentTime = mainSource.time;
         float clipLength = mainSource.clip.length;
-        lastSecondStartTime = Mathf.Max(0f, currentTime - 1f);
+        lastSecondStartTime = Mathf.Max(0f, currentTime - 0.5f);
+        Debug.Log("Echo will start from time: " + lastSecondStartTime.ToString("F2") + "s (current time: " + currentTime.ToString("F2") + "s, clip length: " + clipLength.ToString("F2") + "s)");
         StopAllCoroutines();
         StartCoroutine(PlayEchoRepeats());
     }
@@ -90,7 +92,7 @@ public class PlayerEchoSounds : MonoBehaviour
 
         for (int i = 0; i < echoRepeats; i++)
         {
-            echoSource.volume = baseVolume / Mathf.Pow(2f, i);
+            echoSource.volume = baseVolume / Mathf.Pow(1.4f, i);
 
             // eco começa do último segundo do som principal
             echoSource.time = lastSecondStartTime;
