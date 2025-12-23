@@ -1,19 +1,22 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class EchoSoundEmitter : MonoBehaviour
+public class PlayerEchoSounds : MonoBehaviour
 {
-    public AudioSource mainSource;   // som principal
+    [Header("Fontes de Audio")]
+    public AudioSource mainSource;   // som principal (passos)
     public AudioSource echoSource;   // eco
 
+    [Header("Parâmetros de Eco")]
+    [Range(0f, 1f)]
     public float echoVolume = 0.5f;
     public int echoRepeats = 3;
-    public float echoDelay = 1f;
+    public float echoDelay = 0.3f;
     public float echoClipDuration = 1f;
 
     bool wasPlaying = false;
     bool echoActive = false;
-    float lastSecondStartTime = 0f;
+    float lastSecondStartTime = 0f; // Último segundo a ser repetido
 
     void Awake()
     {
@@ -23,14 +26,21 @@ public class EchoSoundEmitter : MonoBehaviour
         if (echoSource == null)
         {
             echoSource = gameObject.AddComponent<AudioSource>();
-            echoSource.spatialBlend = mainSource.spatialBlend;
+            echoSource.spatialBlend = mainSource != null ? mainSource.spatialBlend : 1f;
+            echoSource.playOnAwake = false;
         }
     }
 
-    // GENÉRICO: qualquer objeto chama isto com "true = está a emitir som"
+    /// <summary>
+    /// Chama isto a partir do controller de movimento:
+    /// true  = jogador está a andar
+    /// false = jogador parou
+    /// </summary>
     public void UpdatePlayingState(bool isPlaying)
     {
-        // Estado "a tocar som principal"
+        if (mainSource == null)
+            return;
+
         if (isPlaying)
         {
             if (!mainSource.isPlaying)
@@ -45,7 +55,6 @@ public class EchoSoundEmitter : MonoBehaviour
         }
         else
         {
-            // transição: estava a tocar e agora parou → dispara eco
             if (wasPlaying)
             {
                 if (mainSource.isPlaying)

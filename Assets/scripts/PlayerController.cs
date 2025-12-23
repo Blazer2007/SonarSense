@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Footsteps / Echo")]
     public AudioSource footstepsSource;     // AudioSource com o clip longo dos passos (Loop ON, PlayOnAwake OFF)
-    public EchoSoundEmitter echoEmitter;   // script de eco ligado ao mesmo objeto / mesma fonte
+    public PlayerEchoSounds playerEcho;   // script de eco ligado ao mesmo objeto / mesma fonte
     public PlayerFootsteps footsteps;      // script que avisa a IA (OverlapSphere)
     public float footstepInterval = 0.35f; // intervalo para eventos de eco para a IA
 
@@ -40,8 +40,8 @@ public class PlayerController : MonoBehaviour
         if (footstepsSource == null)
             footstepsSource = GetComponent<AudioSource>();
 
-        if (echoEmitter == null)
-            echoEmitter = GetComponent<EchoSoundEmitter>();
+        if (playerEcho == null)
+            playerEcho = GetComponent<PlayerEchoSounds>();
     }
 
     void Start()
@@ -76,9 +76,6 @@ public class PlayerController : MonoBehaviour
 
         bool isMoving = moveDir.sqrMagnitude > 0.001f && isGrounded && !isCrouching;
 
-        if (echoEmitter != null)
-            echoEmitter.UpdatePlayingState(isMoving);
-
         // SOM DE PASSOS (fonte principal, loop)
         if (isMoving)
         {
@@ -91,7 +88,6 @@ public class PlayerController : MonoBehaviour
                 footstepsSource.Stop();
         }
 
-        // Eco para o inimigo ouvir (PlayerFootsteps) � mant�m o teu sistema de eventos
         if (isMoving)
         {
             footstepTimer += dt;
@@ -106,6 +102,13 @@ public class PlayerController : MonoBehaviour
         else
         {
             footstepTimer = 0f;
+        }
+
+        // Eco (andar->parar)
+        if (!isMoving && wasWalking && playerEcho != null)
+        {
+            // diz ao emissor de eco para continuar o som a partir da posição atual
+            playerEcho.UpdatePlayingState(false);
         }
 
         wasWalking = isMoving;

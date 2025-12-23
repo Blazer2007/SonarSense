@@ -1,20 +1,19 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SoundEmitter : MonoBehaviour
 {
-    private bool triggered = false;   // já emitiu nesta “ronda”?
+    private bool triggered = false;
     private bool inHand   = false;   // está atualmente na mão do jogador?
+    public ObjectSounds objectSounds;
+
 
     void OnCollisionEnter(Collision collision)
     {
-        // Ignorar colisões com o jogador
-        if (collision.gameObject.CompareTag("Player") || collision.gameObject.GetComponent<PlayerController>() != null)
-            return;
-
-        // Se está na mão, ignorar TODAS as colisões
+        // se está na mão, ignorar TODAS as colisões
         if (inHand) return;
 
-        // Se já emitiu neste lançamento, não emitir outra vez
+        // se já emitiu neste lançamento, não emitir outra vez
         if (triggered) return;
 
         triggered = true;
@@ -22,14 +21,15 @@ public class SoundEmitter : MonoBehaviour
         EchoPulse pulse = FindFirstObjectByType<EchoPulse>();
         if (pulse != null)
             pulse.StartPulse(transform.position);
-    }
 
+    }
 
     // chamado quando o jogador pega no objeto
     public void OnPickedUp()
     {
         inHand = true;
-        triggered = false;   // prepara para um novo lançamento
+        triggered = false;
+        objectSounds.PlayPickupSound();
     }
 
     // chamado quando o jogador larga/atira o objeto
@@ -37,5 +37,6 @@ public class SoundEmitter : MonoBehaviour
     {
         inHand = false;
         // triggered continua false até à primeira colisão depois do lançamento
+        objectSounds.PlayThrowSound();
     }
 }

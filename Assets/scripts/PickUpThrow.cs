@@ -10,7 +10,7 @@ public class PickUpThrow : MonoBehaviour
     public GameObject pickupHint; // texto/ícone de “pegar”
     Transform currentTarget;
 
-
+    //ATUALIZAÇÃO FUTURA: RAIO DE PEGA MAIOR
     Rigidbody heldRb;
 
     void Update()
@@ -21,7 +21,7 @@ public class PickUpThrow : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             if (heldRb == null)
-                TryPickUpCurrent(); // usa o currentTarget em vez de fazer novo raycast
+                TryPickUpCurrent();
             else
                 Drop();
         }
@@ -96,6 +96,7 @@ public class PickUpThrow : MonoBehaviour
         heldRb.AddForce(cam.transform.forward * throwForce, ForceMode.Impulse);
 
         heldRb = null;
+
     }
 
 }
