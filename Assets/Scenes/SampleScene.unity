@@ -1965,9 +1965,9 @@ MonoBehaviour:
     m_Bits: 256
   cam: {fileID: 330585545}
   footstepsSource: {fileID: 1670313633}
-  playerEcho: {fileID: 0}
+  playerEcho: {fileID: 1670313636}
   footsteps: {fileID: 1670313634}
-  footstepInterval: 0.35
+  footstepInterval: 0
 --- !u!54 &1670313631
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2026,7 +2026,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: 125c297c03bd55f4299f04f5800a1e7f, type: 3}
+  m_Resource: {fileID: 8300000, guid: 1f75ccfd6bc439e4d9ee1d84e7d57563, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1

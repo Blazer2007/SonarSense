@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.InputSystem; // se estiveres a usar o novo Input System
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
@@ -23,7 +22,7 @@ public class PlayerController : MonoBehaviour
     [Header("Footsteps / Echo")]
     public AudioSource footstepsSource;     // AudioSource com o clip longo dos passos (Loop ON, PlayOnAwake OFF)
     public PlayerEchoSounds playerEcho;   // script de eco ligado ao mesmo objeto / mesma fonte
-    public PlayerFootsteps footsteps;      // script que avisa a IA (OverlapSphere)
+    public PlayerFootsteps footsteps;      // script que avisa a IA
     public float footstepInterval = 0.35f; // intervalo para eventos de eco para a IA
 
     float horizontalInput;
@@ -57,7 +56,6 @@ public class PlayerController : MonoBehaviour
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
 
-        // dire��es da c�mara no plano XZ
         Vector3 camForward = cam.transform.forward;
         camForward.y = 0f;
         camForward.Normalize();
@@ -66,7 +64,6 @@ public class PlayerController : MonoBehaviour
         camRight.y = 0f;
         camRight.Normalize();
 
-        // dire��o desejada de movimento em rela��o � c�mara
         Vector3 moveDir = camForward * v + camRight * h;
         if (moveDir.sqrMagnitude > 1f) moveDir.Normalize();
 
@@ -81,15 +78,7 @@ public class PlayerController : MonoBehaviour
         {
             if (footstepsSource != null && !footstepsSource.isPlaying)
                 footstepsSource.Play();
-        }
-        else
-        {
-            if (footstepsSource != null && footstepsSource.isPlaying)
-                footstepsSource.Stop();
-        }
 
-        if (isMoving)
-        {
             footstepTimer += dt;
             if (footstepTimer >= footstepInterval)
             {
@@ -105,10 +94,10 @@ public class PlayerController : MonoBehaviour
         }
 
         // Eco (andar->parar)
-        if (!isMoving && wasWalking && playerEcho != null)
+        if (playerEcho != null)
         {
-            // diz ao emissor de eco para continuar o som a partir da posição atual
-            playerEcho.UpdatePlayingState(false);
+            //Se parar de andar, avisar o script de eco para iniciar o eco
+            playerEcho.UpdatePlayingState(isMoving);
         }
 
         wasWalking = isMoving;
@@ -116,16 +105,13 @@ public class PlayerController : MonoBehaviour
         if (isGrounded && Input.GetButtonDown("Jump"))
             Jump();
 
-        // Input para agachar
         isCrouching = Input.GetKey(crouchKey);
     }
 
     void FixedUpdate()
     {
-        // verifica��o de ch�o
         isGrounded = Physics.Raycast(transform.position, Vector3.down, 1.1f, groundLayer);
 
-        // se estiveres realmente a usar esta parte de f�sica no eixo X:
         Vector3 velocity = rb.linearVelocity;
         float targetVelX = horizontalInput * moveSpeed;
         float newVelX = Mathf.MoveTowards(velocity.x, targetVelX, 50f * Time.fixedDeltaTime);

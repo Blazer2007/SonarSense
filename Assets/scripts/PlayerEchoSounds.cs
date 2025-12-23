@@ -41,6 +41,7 @@ public class PlayerEchoSounds : MonoBehaviour
         if (mainSource == null)
             return;
 
+        // Se está a tocar
         if (isPlaying)
         {
             if (!mainSource.isPlaying)
@@ -53,7 +54,7 @@ public class PlayerEchoSounds : MonoBehaviour
                 echoActive = false;
             }
         }
-        else
+        else // Se parou
         {
             if (wasPlaying)
             {
@@ -78,7 +79,6 @@ public class PlayerEchoSounds : MonoBehaviour
         float currentTime = mainSource.time;
         float clipLength = mainSource.clip.length;
         lastSecondStartTime = Mathf.Max(0f, currentTime - 1f);
-
         StopAllCoroutines();
         StartCoroutine(PlayEchoRepeats());
     }
@@ -92,21 +92,25 @@ public class PlayerEchoSounds : MonoBehaviour
         {
             echoSource.volume = baseVolume / Mathf.Pow(2f, i);
 
+            // eco começa do último segundo do som principal
             echoSource.time = lastSecondStartTime;
             echoSource.Play();
 
+            // Recolha do tempo restante no clip de eco
             float remaining = echoSource.clip.length - lastSecondStartTime;
+
+            // Duração do eco nesta repetição
             float duration = Mathf.Min(echoClipDuration, remaining);
 
+            // Esperar pela duração do eco
             yield return new WaitForSeconds(duration);
 
+            // parar o som de eco
             echoSource.Stop();
 
-            if (i < echoRepeats - 1)
+            // Esperar pelo atraso antes da próxima repetição, caso não seja a última repetição
+            if (i < echoRepeats-1)
                 yield return new WaitForSeconds(echoDelay);
         }
-
-        echoSource.Stop();
-        echoActive = false;
     }
 }
