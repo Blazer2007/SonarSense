@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Limit
   - Pickup
+  - EndPin
   layers:
   - Default
   - TransparentFX
