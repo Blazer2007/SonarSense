@@ -50,7 +50,6 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        //Cursor.lockState = CursorLockMode.Locked;
         float dt = Time.deltaTime;
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");

@@ -80,7 +80,7 @@ public class PlayerEchoSounds : MonoBehaviour
         float currentTime = mainSource.time;
         float clipLength = mainSource.clip.length;
         lastSecondStartTime = Mathf.Max(0f, currentTime - 0.5f);
-        Debug.Log("Echo will start from time: " + lastSecondStartTime.ToString("F2") + "s (current time: " + currentTime.ToString("F2") + "s, clip length: " + clipLength.ToString("F2") + "s)");
+
         StopAllCoroutines();
         StartCoroutine(PlayEchoRepeats());
     }

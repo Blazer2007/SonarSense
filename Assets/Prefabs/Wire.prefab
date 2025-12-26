@@ -210,10 +210,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1525737081225600807}
   - component: {fileID: 1427146463755952699}
-  - component: {fileID: 1662232449891757958}
   - component: {fileID: 5378950875066264968}
   - component: {fileID: 7151971805923177246}
-  - component: {fileID: 720607523038982578}
   m_Layer: 5
   m_Name: Handle
   m_TagString: Untagged
@@ -252,30 +250,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb9899904f602aa4f9acaf9dfe894549, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  handleRect: {fileID: 0}
   wire: {fileID: 0}
   snapRadius: 0.5
---- !u!64 &1662232449891757958
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8337311112248396632}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
 --- !u!33 &5378950875066264968
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -329,30 +306,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!54 &720607523038982578
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8337311112248396632}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
