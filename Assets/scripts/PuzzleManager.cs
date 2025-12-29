@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using Unity.Cinemachine;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.LowLevel;
 using UnityEngine.UI;
 
 public class PuzzleManager : MonoBehaviour
@@ -12,39 +14,52 @@ public class PuzzleManager : MonoBehaviour
     public float[] frequencies;
     public int connectionsNeeded = 4;
     public int currentConnections = 0;
-    public GameObject PuzzleCanvas;
+    public PlayerController PlayerController;
+    public Canvas canvas;
 
-    bool isActive = false;
+    public bool isActive = false;
 
     private void Start()
-    {
-        PuzzleCanvas = GameObject.Find("PuzzleCanvas");
+    { 
     }
-    void OnMouseDown()
+    void Update()
     {
-        if (isActive) return;
+            CinemachineBrain brain = Camera.main.GetComponent<CinemachineBrain>();
+            if (brain != null)
+            {
+                CinemachineCamera activeCam = brain.ActiveVirtualCamera as CinemachineCamera;
+                if (activeCam != null)
+                {
+                    Debug.Log("Câmera ativa: " + activeCam.name);
+                }
+            }
 
-        isActive = true;
-
-        // Mostrar minijogo
-        PuzzleCanvas.SetActive(true);
-
-        game3DCamera.Priority = 0;
-        Puzzlecam.Priority = 10;
     }
-
-    public void CloseMinigame()
+    public void ClosePuzzle()
     {
         isActive = false;
 
-        PuzzleCanvas.SetActive(false);
-
         game3DCamera.Priority = 10;
         Puzzlecam.Priority = 0;
+
+        PlayerController.moveSpeed = 5f;
+        PlayerController.jumpForce = 5f;
+
+        Debug.Log("puzzle acabou");
+
     }
     public void StartPuzzle()
     {
-        Puzzlecam.gameObject.SetActive(true);
+        Debug.Log("puzzle comecou");
+
+        PlayerController.moveSpeed = 0f;
+
+        canvas.enabled = true;
+
+        game3DCamera.enabled = false;
+
+        game3DCamera.Priority = 0;
+        Puzzlecam.Priority = 100;
 
         // Gera fios pareados aleatoriamente
         List<float> freqList = new List<float>(frequencies);
