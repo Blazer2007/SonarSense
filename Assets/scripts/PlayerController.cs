@@ -4,20 +4,20 @@
 public class PlayerController : MonoBehaviour
 {
     [Header("Stealth / Crouch")]
-    public bool isCrouching = false;
+    public bool isCrouching = false; // pode agachar-se?
     public float crouchSpeedMultiplier = 0.4f; // andar devagar
-    public KeyCode crouchKey = KeyCode.LeftControl;
+    public KeyCode crouchKey = KeyCode.LeftControl; // tecla para agachamento
 
     [Header("Movement")]
-    public float moveSpeed = 5f;
-    public float maxSpeed = 5f;
-    public float jumpForce = 5f;
-    public float groundCheckRadius = 0.5f;
-    public Transform groundCheck;
-    public LayerMask groundLayer;
+    public float moveSpeed = 5f; // velocidade de movimento
+    public float maxSpeed = 5f; // velocidade máxima
+    public float jumpForce = 5f; // força de salto
+    public float groundCheckRadius = 0.5f; // raio de verificação do chão
+    public Transform groundCheck; // chão
+    public LayerMask groundLayer; // camada do chão
 
     [Header("Camera")]
-    public Camera cam;
+    public Camera cam; // camara do jogador
 
     [Header("Footsteps / Echo")]
     public AudioSource footstepsSource;     // AudioSource com o clip longo dos passos (Loop ON, PlayOnAwake OFF)
@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
     Rigidbody rb;
     float footstepTimer = 0f;
     bool wasWalking = false;
+    public bool canplay = true;
 
     void Awake()
     {
@@ -45,7 +46,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        //Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     void Update()
@@ -74,13 +75,13 @@ public class PlayerController : MonoBehaviour
         // SOM DE PASSOS (fonte principal, loop)
         if (isMoving)
         {
-            if (footstepsSource != null && !footstepsSource.isPlaying)
+            if (footstepsSource != null && !footstepsSource.isPlaying && canplay)
                 footstepsSource.Play();
 
             footstepTimer += dt;
             if (footstepTimer >= footstepInterval)
             {
-                if (footsteps != null)
+                if (footsteps != null && canplay)
                     footsteps.PlayFootstep();
 
                 footstepTimer = 0f;
@@ -92,7 +93,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // Eco (andar->parar)
-        if (playerEcho != null)
+        if (playerEcho != null && canplay)
         {
             //Se parar de andar, avisar o script de eco para iniciar o eco
             playerEcho.UpdatePlayingState(isMoving);

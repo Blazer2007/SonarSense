@@ -12,6 +12,30 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1328804642920009, guid: fd4bb20128a533045b4719e13be6d59c, type: 3}
+      propertyPath: line
+      value: 
+      objectReference: {fileID: 1661037563185172919}
+    - target: {fileID: 1328804642920009, guid: fd4bb20128a533045b4719e13be6d59c, type: 3}
+      propertyPath: fixedEnd
+      value: 
+      objectReference: {fileID: 6364718525779384290}
+    - target: {fileID: 1328804642920009, guid: fd4bb20128a533045b4719e13be6d59c, type: 3}
+      propertyPath: frequency
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 51269919905814005, guid: fd4bb20128a533045b4719e13be6d59c, type: 3}
+      propertyPath: m_Color.b
+      value: 0.043137256
+      objectReference: {fileID: 0}
+    - target: {fileID: 51269919905814005, guid: fd4bb20128a533045b4719e13be6d59c, type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1290644620053035387, guid: fd4bb20128a533045b4719e13be6d59c, type: 3}
+      propertyPath: m_Name
+      value: DragEnd_3
+      objectReference: {fileID: 0}
     - target: {fileID: 4964292114032964137, guid: fd4bb20128a533045b4719e13be6d59c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -52,9 +76,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7184740500246480477, guid: fd4bb20128a533045b4719e13be6d59c, type: 3}
+      propertyPath: frequency
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7739584151492248465, guid: fd4bb20128a533045b4719e13be6d59c, type: 3}
       propertyPath: m_Name
       value: Wire_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8081456263099986022, guid: fd4bb20128a533045b4719e13be6d59c, type: 3}
+      propertyPath: m_Color.b
+      value: 0.03983879
+      objectReference: {fileID: 0}
+    - target: {fileID: 8081456263099986022, guid: fd4bb20128a533045b4719e13be6d59c, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8081456263099986022, guid: fd4bb20128a533045b4719e13be6d59c, type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8226380399354694204, guid: fd4bb20128a533045b4719e13be6d59c, type: 3}
+      propertyPath: m_Name
+      value: Line_3
       objectReference: {fileID: 0}
     - target: {fileID: 8504878739350278114, guid: fd4bb20128a533045b4719e13be6d59c, type: 3}
       propertyPath: m_Color.b
@@ -68,8 +112,22 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8793303571232404260, guid: fd4bb20128a533045b4719e13be6d59c, type: 3}
+      propertyPath: m_Name
+      value: FixedEnd_3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fd4bb20128a533045b4719e13be6d59c, type: 3}
+--- !u!120 &1661037563185172919 stripped
+LineRenderer:
+  m_CorrespondingSourceObject: {fileID: 4411104089395818077, guid: fd4bb20128a533045b4719e13be6d59c, type: 3}
+  m_PrefabInstance: {fileID: 3042835829170798570}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &6364718525779384290 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 8245623452063754248, guid: fd4bb20128a533045b4719e13be6d59c, type: 3}
+  m_PrefabInstance: {fileID: 3042835829170798570}
+  m_PrefabAsset: {fileID: 0}

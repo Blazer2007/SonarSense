@@ -133,7 +133,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7660116872358359450, guid: 6579207d59e87f64faa09953f7441d6c, type: 3}
       propertyPath: m_Pivot.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7660116872358359450, guid: 6579207d59e87f64faa09953f7441d6c, type: 3}
       propertyPath: m_AnchorMax.x
@@ -141,7 +141,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7660116872358359450, guid: 6579207d59e87f64faa09953f7441d6c, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7660116872358359450, guid: 6579207d59e87f64faa09953f7441d6c, type: 3}
       propertyPath: m_AnchorMin.x
@@ -149,7 +149,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7660116872358359450, guid: 6579207d59e87f64faa09953f7441d6c, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7660116872358359450, guid: 6579207d59e87f64faa09953f7441d6c, type: 3}
       propertyPath: m_SizeDelta.x
@@ -439,7 +439,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 766359395506605511, guid: 5f27bdbdd35dda54ca8faa0ca1a78d5e, type: 3}
       propertyPath: m_Pivot.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 766359395506605511, guid: 5f27bdbdd35dda54ca8faa0ca1a78d5e, type: 3}
       propertyPath: m_AnchorMax.x
@@ -447,7 +447,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 766359395506605511, guid: 5f27bdbdd35dda54ca8faa0ca1a78d5e, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 766359395506605511, guid: 5f27bdbdd35dda54ca8faa0ca1a78d5e, type: 3}
       propertyPath: m_AnchorMin.x
@@ -455,7 +455,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 766359395506605511, guid: 5f27bdbdd35dda54ca8faa0ca1a78d5e, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 766359395506605511, guid: 5f27bdbdd35dda54ca8faa0ca1a78d5e, type: 3}
       propertyPath: m_SizeDelta.x
@@ -653,7 +653,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Priority:
-    Enabled: 0
+    Enabled: 1
     m_Value: 10
   OutputChannel: 1
   StandbyUpdate: 2
@@ -664,17 +664,17 @@ MonoBehaviour:
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
-    FieldOfView: 61.927517
-    OrthographicSize: 0.24000002
-    NearClipPlane: 0.099999994
-    FarClipPlane: 99.99999
+    FieldOfView: 40
+    OrthographicSize: 10
+    NearClipPlane: 0.1
+    FarClipPlane: 5000
     Dutch: 0
     ModeOverride: 0
     PhysicalProperties:
       GateFit: 2
-      SensorSize: {x: 36, y: 24}
+      SensorSize: {x: 21.946, y: 16.002}
       LensShift: {x: 0, y: 0}
-      FocusDistance: 9.999999
+      FocusDistance: 10
       Iso: 200
       ShutterSpeed: 0.005
       Aperture: 16
@@ -753,14 +753,14 @@ Camera:
   serializedVersion: 2
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
-  m_projectionMatrixMode: 1
+  m_projectionMatrixMode: 2
   m_GateFitMode: 2
   m_FOVAxisMode: 0
   m_Iso: 200
   m_ShutterSpeed: 0.005
   m_Aperture: 16
   m_FocusDistance: 10
-  m_FocalLength: 50
+  m_FocalLength: 20.78461
   m_BladeCount: 5
   m_Curvature: {x: 2, y: 11}
   m_BarrelClipping: 0.25
@@ -775,7 +775,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 60.000004
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -897,19 +897,19 @@ Camera:
   serializedVersion: 2
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
-  m_projectionMatrixMode: 2
+  m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
   m_Iso: 200
   m_ShutterSpeed: 0.005
   m_Aperture: 16
-  m_FocusDistance: 9.999999
-  m_FocalLength: 20.78461
+  m_FocusDistance: 10
+  m_FocalLength: 21.982569
   m_BladeCount: 5
   m_Curvature: {x: 2, y: 11}
   m_BarrelClipping: 0.25
   m_Anamorphism: 0
-  m_SensorSize: {x: 36, y: 24}
+  m_SensorSize: {x: 21.946, y: 16.002}
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
@@ -917,15 +917,15 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.099999994
-  far clip plane: 99.99999
-  field of view: 60.000004
+  near clip plane: 0.1
+  far clip plane: 5000
+  field of view: 40
   orthographic: 0
-  orthographic size: 0.24000002
-  m_Depth: -1
+  orthographic size: 10
+  m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 511
+    m_Bits: 4294967295
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -946,7 +946,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.420373, y: 10.6222105, z: 67.36652}
+  m_LocalPosition: {x: 1.88, y: 2.25, z: -0.81}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2132,7 +2132,7 @@ MonoBehaviour:
   currentConnections: 0
   PlayerController: {fileID: 1670313630}
   canvas: {fileID: 1789991850}
-  isActive: 0
+  iswasActive: 0
 --- !u!1 &1218817283
 GameObject:
   m_ObjectHideFlags: 0
@@ -2629,6 +2629,7 @@ MonoBehaviour:
   playerEcho: {fileID: 1670313636}
   footsteps: {fileID: 1670313634}
   footstepInterval: 0
+  canplay: 0
 --- !u!54 &1670313631
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3302,7 +3303,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_TargetDisplay: 0
 --- !u!224 &1789991851
 RectTransform:
@@ -3318,8 +3319,8 @@ RectTransform:
   m_Children:
   - {fileID: 1193309532}
   - {fileID: 945042330}
-  - {fileID: 2138334840}
   - {fileID: 1009795430}
+  - {fileID: 2138334840}
   m_Father: {fileID: 1857678031}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -3843,7 +3844,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Priority:
     Enabled: 0
-    m_Value: 100
+    m_Value: 0
   OutputChannel: 1
   StandbyUpdate: 2
   m_StreamingVersion: 20241001
@@ -3853,17 +3854,17 @@ MonoBehaviour:
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
-    FieldOfView: 60.000004
-    OrthographicSize: 0.24000002
-    NearClipPlane: 0.099999994
-    FarClipPlane: 99.99999
+    FieldOfView: 40
+    OrthographicSize: 10
+    NearClipPlane: 0.1
+    FarClipPlane: 5000
     Dutch: 0
     ModeOverride: 0
     PhysicalProperties:
       GateFit: 2
-      SensorSize: {x: 36, y: 24}
+      SensorSize: {x: 21.946, y: 16.002}
       LensShift: {x: 0, y: 0}
-      FocusDistance: 9.999999
+      FocusDistance: 10
       Iso: 200
       ShutterSpeed: 0.005
       Aperture: 16
@@ -4091,7 +4092,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 766359395506605511, guid: 5f27bdbdd35dda54ca8faa0ca1a78d5e, type: 3}
       propertyPath: m_Pivot.y
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 766359395506605511, guid: 5f27bdbdd35dda54ca8faa0ca1a78d5e, type: 3}
       propertyPath: m_AnchorMax.x
@@ -4099,7 +4100,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 766359395506605511, guid: 5f27bdbdd35dda54ca8faa0ca1a78d5e, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 766359395506605511, guid: 5f27bdbdd35dda54ca8faa0ca1a78d5e, type: 3}
       propertyPath: m_AnchorMin.x
@@ -4107,7 +4108,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 766359395506605511, guid: 5f27bdbdd35dda54ca8faa0ca1a78d5e, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 766359395506605511, guid: 5f27bdbdd35dda54ca8faa0ca1a78d5e, type: 3}
       propertyPath: m_SizeDelta.x
@@ -4421,7 +4422,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7660116872358359450, guid: 6579207d59e87f64faa09953f7441d6c, type: 3}
       propertyPath: m_Pivot.y
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7660116872358359450, guid: 6579207d59e87f64faa09953f7441d6c, type: 3}
       propertyPath: m_AnchorMax.x
@@ -4429,7 +4430,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7660116872358359450, guid: 6579207d59e87f64faa09953f7441d6c, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7660116872358359450, guid: 6579207d59e87f64faa09953f7441d6c, type: 3}
       propertyPath: m_AnchorMin.x
@@ -4437,7 +4438,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7660116872358359450, guid: 6579207d59e87f64faa09953f7441d6c, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7660116872358359450, guid: 6579207d59e87f64faa09953f7441d6c, type: 3}
       propertyPath: m_SizeDelta.x
