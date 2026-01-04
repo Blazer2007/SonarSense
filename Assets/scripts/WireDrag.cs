@@ -6,7 +6,9 @@ public class WireDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 {
     public float frequency; // Frequência do fio
     public bool isConnected = false; // Verifica se o fio está conectado a um slot
-    private Vector2 startPos; // Posição inicial do fio
+    public bool isDragging = false;
+    public bool starteddragging = false;
+    private Vector3 startPos; // Posição inicial do fio
     private RectTransform rectTransform; // Referência ao RectTransform do fio
     private Canvas canvas; // Referência ao Canvas pai
     private CanvasGroup canvasGroup; // Para controlar a interatividade durante o drag
@@ -26,15 +28,17 @@ public class WireDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         // Inicializa a linha com 2 pontos: fixo + ponta de arrasto
         line.positionCount = 2;
         line.useWorldSpace = true;
-        line.SetPosition(0, fixedEnd.position);
-        line.SetPosition(1, rectTransform.position);
+        line.SetPosition(0, fixedEnd.position + new Vector3(0f,0f,-0.5f));
+        line.SetPosition(1, rectTransform.position + new Vector3(-0.1f, 0f, -0.5f));
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
         if (isConnected) return; // não permite arrastar se já estiver conectado
-        startPos = rectTransform.anchoredPosition; // Salva a posição inicial
+        startPos = rectTransform.position;// Salva a posição inicial
         canvasGroup.blocksRaycasts = false;  // Permite drag suave
+        isDragging = true;
+        starteddragging = true;
     }
 
 
@@ -68,10 +72,12 @@ public class WireDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             if (okWorld) // se a conversão do ponteiro para o mundo 3D foi bem sucedida
             {
                 rectTransform.position = worldPoint; // posiciona o fio na posição do mundo convertida
+                line.SetPosition(1, rectTransform.position); // Atualiza a ponta da linha para seguir o fio
             }
             else // se a conversão falhou
             {
                 rectTransform.anchoredPosition += eventData.delta / Mathf.Max(1f, canvas.scaleFactor); // move o fio baseado no ponteiro
+                line.SetPosition(1, rectTransform.position); // Atualiza a ponta da linha para seguir o fio
             }
         }
         else // em 2D
@@ -95,12 +101,14 @@ public class WireDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                 anchored.x = Mathf.Clamp(anchored.x, min.x, max.x);
                 anchored.y = Mathf.Clamp(anchored.y, min.y, max.y);
                 rectTransform.anchoredPosition = anchored;
+                line.SetPosition(1, rectTransform.position); // Atualiza a ponta da linha para seguir o fio
             }
             else // se a conversão falhou
             {
                 rectTransform.anchoredPosition += eventData.delta / Mathf.Max(1f, canvas.scaleFactor); // move o fio baseado no ponteiro
+                line.SetPosition(1, rectTransform.position); // Atualiza a ponta da linha para seguir o fio
             }
-            line.SetPosition(1, rectTransform.position); // Atualiza a ponta da linha para seguir o fio
+            
         }
     }
 
@@ -108,13 +116,14 @@ public class WireDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     {
         canvasGroup.blocksRaycasts = true;
 
+        isDragging = false;
+
         // Se não estiver conectado a um slot
         if (!isConnected)
         {
             // Volta à posição inicial se não encaixou
             rectTransform.anchoredPosition = startPos;
             line.SetPosition(1, rectTransform.position);
-            Debug.Log("Fio voltou");
         }
         else return;
     }
@@ -127,7 +136,6 @@ public class WireDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
         rectTransform.position = slotPosition;
         line.SetPosition(1, slotPosition);
-        Debug.Log("Fio conectado!");
     }
 
 }

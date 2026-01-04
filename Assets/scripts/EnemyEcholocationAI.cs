@@ -11,7 +11,7 @@ public class EnemyEcholocationAI : MonoBehaviour
 
     [Header("Wander Settings")]
     public float wanderRadius = 10f;      // raio máximo à volta do inimigo
-    public float wanderInterval = 3f;     // tempo máximo entre novos destinos
+    public float wanderInterval = 5f;     // tempo máximo entre novos destinos
 
     [Header("Hearing")]
     public float collisionHearingRadius = 20f;

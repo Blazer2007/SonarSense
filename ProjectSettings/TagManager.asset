@@ -17,7 +17,7 @@ TagManager:
   - Limit
   - PickUp
   - Walkable
-  - Minigame
+  - Puzzle
   - 
   - 
   - 
@@ -43,6 +43,9 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: puzzle
+    uniqueID: 2057905687
     locked: 0
   m_RenderingLayers:
   - Default

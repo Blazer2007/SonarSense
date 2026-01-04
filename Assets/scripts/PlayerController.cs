@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
+        canplay = true;
         rb = GetComponent<Rigidbody>();
         rb.rotation = transform.rotation;
 
