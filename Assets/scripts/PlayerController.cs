@@ -11,10 +11,16 @@ public class PlayerController : MonoBehaviour
     [Header("Movement")]
     public float moveSpeed = 5f; // velocidade de movimento
     public float maxSpeed = 5f; // velocidade máxima
+    public float fatigueSpeedPenalty = 0.5f; // penalidade de velocidade por fadiga
     public float jumpForce = 5f; // força de salto
     public float groundCheckRadius = 0.5f; // raio de verificação do chão
     public Transform groundCheck; // chão
     public LayerMask groundLayer; // camada do chão
+    public float inputX; // entrada horizontal
+    public float inputZ; // entrada vertical
+    public bool canWalk = true;
+    public bool isFatigued = false;
+    public bool isMoving = false;
 
     [Header("Camera")]
     public Camera cam; // camara do jogador
@@ -29,7 +35,6 @@ public class PlayerController : MonoBehaviour
     bool isGrounded;
     Rigidbody rb;
     float footstepTimer = 0f;
-    bool wasWalking = false;
     public bool canplay = true;
 
     void Awake()
@@ -53,8 +58,8 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         float dt = Time.deltaTime;
-        float h = Input.GetAxis("Horizontal");
-        float v = Input.GetAxis("Vertical");
+        inputX = Input.GetAxis("Horizontal");
+        inputZ = Input.GetAxis("Vertical");
 
         Vector3 camForward = cam.transform.forward;
         camForward.y = 0f;
@@ -64,14 +69,16 @@ public class PlayerController : MonoBehaviour
         camRight.y = 0f;
         camRight.Normalize();
 
-        Vector3 moveDir = camForward * v + camRight * h;
+        Vector3 moveDir = camForward * inputZ + camRight * inputX;
         if (moveDir.sqrMagnitude > 1f) moveDir.Normalize();
 
+        if (isFatigued)
+            moveSpeed = moveSpeed * fatigueSpeedPenalty;
         float currentSpeed = isCrouching ? moveSpeed * crouchSpeedMultiplier : moveSpeed;
         Vector3 move = moveDir * currentSpeed * dt;
         transform.Translate(move, Space.World);
-
-        bool isMoving = moveDir.sqrMagnitude > 0.001f && isGrounded && !isCrouching;
+        
+        isMoving = moveDir.sqrMagnitude > 0.001f && isGrounded && !isCrouching;
 
         // SOM DE PASSOS (fonte principal, loop)
         if (isMoving)
@@ -99,8 +106,6 @@ public class PlayerController : MonoBehaviour
             //Se parar de andar, avisar o script de eco para iniciar o eco
             playerEcho.UpdatePlayingState(isMoving);
         }
-
-        wasWalking = isMoving;
 
         if (isGrounded && Input.GetButtonDown("Jump"))
             Jump();

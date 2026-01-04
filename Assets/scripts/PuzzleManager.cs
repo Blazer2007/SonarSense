@@ -38,7 +38,13 @@ public class PuzzleManager : MonoBehaviour
             Debug.Log("Frequência do slot atribuída: " + freq);
         }
     }
-
+    public void Update()
+    {
+        if (iswasActive) 
+        {
+            PlayerController.isMoving = false;
+        }
+    }
     public void StartPuzzle()
     {
         iswasActive = true;
@@ -92,12 +98,11 @@ public class PuzzleManager : MonoBehaviour
         PlayerController.canplay = true;
         Cursor.lockState = CursorLockMode.Locked;
 
-        PlayerController.moveSpeed = 5f;
-        PlayerController.jumpForce = 5f;
+        PlayerController.moveSpeed = 10f;
+        PlayerController.jumpForce = 10f;
     }
 }
 
-// Extensão para baralhar listas (Fisher-Yates)
 public static class ListExtensions
 {
     public static void Shuffle<T>(this IList<T> list)
