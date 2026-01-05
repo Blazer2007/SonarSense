@@ -7,11 +7,16 @@ public class PlayerController : MonoBehaviour
     public bool isCrouching = false; // pode agachar-se?
     public float crouchSpeedMultiplier = 0.4f; // andar devagar
     public KeyCode crouchKey = KeyCode.LeftControl; // tecla para agachamento
+    public Transform playerHead;          // a tua camera ou objeto "Head"
+    public float headCrouchOffset = -0.5f; // quanto desce ao agachar
+    public float headMoveSpeed = 8f;       // velocidade do movimento
+    private Vector3 headOriginalLocalPos;
+    private Vector3 headCrouchLocalPos;
 
     [Header("Movement")]
     public float moveSpeed = 5f; // velocidade de movimento
     public float maxSpeed = 5f; // velocidade máxima
-    public float fatigueSpeedPenalty = 0.5f; // penalidade de velocidade por fadiga
+    public float fatigueSpeedPenalty = 0.9f; // penalidade de velocidade por fadiga
     public float jumpForce = 5f; // força de salto
     public float groundCheckRadius = 0.5f; // raio de verificação do chão
     public Transform groundCheck; // chão
@@ -53,10 +58,25 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+
+            // guarda a posição original da cabeça/câmara em espaço local
+            headOriginalLocalPos = playerHead.localPosition;
+            headCrouchLocalPos = headOriginalLocalPos + new Vector3(0f, headCrouchOffset, 0f);
+
     }
 
     void Update()
     {
+        
+        Vector3 targetPos = isCrouching ? headCrouchLocalPos : headOriginalLocalPos;
+
+        // move suavemente a cabeça/câmara
+        playerHead.localPosition = Vector3.Lerp(
+            playerHead.localPosition,
+            targetPos,
+            headMoveSpeed * Time.deltaTime
+        );
+
         float dt = Time.deltaTime;
         inputX = Input.GetAxis("Horizontal");
         inputZ = Input.GetAxis("Vertical");
@@ -72,9 +92,23 @@ public class PlayerController : MonoBehaviour
         Vector3 moveDir = camForward * inputZ + camRight * inputX;
         if (moveDir.sqrMagnitude > 1f) moveDir.Normalize();
 
-        if (isFatigued)
-            moveSpeed = moveSpeed * fatigueSpeedPenalty;
-        float currentSpeed = isCrouching ? moveSpeed * crouchSpeedMultiplier : moveSpeed;
+        if (isFatigued) 
+        {
+            moveSpeed = moveSpeed * Mathf.Pow(fatigueSpeedPenalty, dt * 5);
+            if(moveSpeed < 3) 
+            {
+                moveSpeed = 3f;
+            }
+            if (isCrouching) 
+            {
+                moveSpeed = 3.5f;
+            }
+        }
+        else moveSpeed = 10f;
+
+
+        float currentSpeed = isCrouching ? moveSpeed * (crouchSpeedMultiplier = isFatigued ? 1 : crouchSpeedMultiplier)  : moveSpeed;
+        
         Vector3 move = moveDir * currentSpeed * dt;
         transform.Translate(move, Space.World);
         

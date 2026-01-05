@@ -8,9 +8,9 @@ public class PlayerStamina : MonoBehaviour
     public float currentStamina;
 
     [Header("Custos / Regeneração")]
-    public float costPerStep = 0.5f;        // quanto tira por “passo”
-    public float regenCrouch = 5f;          // por segundo, agachado
-    public float regenIdle = 10f;           // por segundo, parado de pé
+    public float costPerStep = 0.3f;          // custo de stamina ao andar
+    public float regenCrouch = 7.5f;          // por segundo, agachado
+    public float regenIdle = 12f;           // por segundo, parado de pé
 
     [Header("Movimento / Referências")]
     public PlayerController playerController;
@@ -38,9 +38,9 @@ public class PlayerStamina : MonoBehaviour
 
     void HandleMovementStamina()
     {
-        if (isMoving)
+        if (isMoving && !playerController.isCrouching)
         {
-                SpendStamina(costPerStep);
+            SpendStamina(costPerStep);
         }
     }
 
