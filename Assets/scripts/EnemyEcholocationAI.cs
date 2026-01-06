@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
 
-enum EnemyState { Wander, InvestigateSound, ChasePlayer }
+enum EnemyState { Wander, InvestigateSound, ChasePlayer , AttackPlayer}
 
 public class EnemyEcholocationAI : MonoBehaviour
 {
@@ -17,12 +18,19 @@ public class EnemyEcholocationAI : MonoBehaviour
     public float collisionHearingRadius = 20f;
     public float footstepHearingRadius = 8f;
 
+    [Header("Enemy Attack")]
+    public float damage = 20f;
+    public float attackSpeed = 2f;
+
     EnemyState state = EnemyState.Wander;
     Vector3 lastHeardPosition;
     Transform player;
     float wanderTimer;
     public float losePlayerDistance = 10f; // distância a partir da qual o inimigo desiste de perseguir o jogador
     public float chasepeed = 6f;
+
+    public PlayerHealth playerHealth;
+    bool canAttack = true;
 
 
     void Start()
@@ -82,7 +90,11 @@ public class EnemyEcholocationAI : MonoBehaviour
                         wanderTimer = 0f;
                         SetRandomDestination();
                     }
-                    
+                    if (distToPlayer <= enemy.stoppingDistance)
+                    {
+                        state = EnemyState.AttackPlayer;
+                    }
+
                 }
                 else
                 {
@@ -91,9 +103,28 @@ public class EnemyEcholocationAI : MonoBehaviour
                     SetRandomDestination();
                 }
                 break;
+            case EnemyState.AttackPlayer:
+                // Deal Damage
+                AttackPlayer(damage);
+                break;
         }
     }
+    IEnumerator WaitToAttack()
+    {
+        yield return new WaitForSeconds(attackSpeed);
+        canAttack = true;
+    }
+    void AttackPlayer(float damage) 
+    {
+        if (!canAttack) return;
+        else { 
+            canAttack = false; 
+            playerHealth.TakeDamage(damage);
+        }
+        
 
+        StartCoroutine(WaitToAttack());
+    }
     void SetRandomDestination()
     {
         if (state != EnemyState.Wander) return;

@@ -40,7 +40,7 @@ public class PlayerStamina : MonoBehaviour
     {
         if (isMoving && !playerController.isCrouching)
         {
-            SpendStamina(costPerStep);
+            SpendStamina(costPerStep * Time.deltaTime * 20);
         }
     }
 
@@ -89,6 +89,13 @@ public class PlayerStamina : MonoBehaviour
         if (staminaBar != null)
         {
             staminaBar.value = currentStamina;
+            if (staminaBar.value < 60 && staminaBar.value > 30)
+                staminaBar.fillRect.GetComponent<Image>().color = Color.yellow;
+            else if (staminaBar.value <= 30)
+                staminaBar.fillRect.GetComponent<Image>().color = Color.red;
+            else
+                staminaBar.fillRect.GetComponent<Image>().color = Color.green;
+
         }
     }
 }

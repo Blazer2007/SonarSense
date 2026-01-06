@@ -45,21 +45,31 @@ public class EchoPulse : MonoBehaviour
         currentDistance += Time.deltaTime * pulseSpeed;
         Shader.SetGlobalFloat("_PulseDistance", currentDistance);
 
-        // Criação da variavel que guarda a distancia entre a origem do som e o jogador(para limitar a onda de som)
         float distToPlayer = Vector3.Distance(pulseOrigin, player.position);
-
-        // Definir a distância MÁXIMA que a onda deve percorrer (o maior valor entre hearingRange e distToPlayer).
         float maxDistance = Mathf.Max(hearingRange, distToPlayer);
 
-        // Adicionar uma margem de segurança (Buffer) à distância máxima.
-        // Isto garante que a onda de som se afasta o suficiente de todos os objetos atingidos.
-        float stopBuffer = 20f;
+        float stopBuffer = 20f;              // já tens
+        float fadeDistance = 10f;            // largura da zona de fade no fim
 
-        if (currentDistance >= maxDistance + stopBuffer)
+        float endDistance = maxDistance + stopBuffer;
+        float fadeStart = endDistance - fadeDistance;
+
+        // 1 até começar a zona de fade, depois desce até 0
+        float fade = 1f;
+        if (currentDistance >= fadeStart)
         {
-            pulseActive = false; // A onda para apenas depois de passar a área de interesse
+            float t = Mathf.InverseLerp(endDistance, fadeStart, currentDistance);
+            fade = Mathf.Clamp01(t);
         }
+        Shader.SetGlobalFloat("_PulseFade", fade);
 
-        //PS. Pode ser preciso que, em vez de a onda chegar apenas ao jogador, passe por ele até uma certa distancia.Por exemplo no caso de haver inimigos que aparecam por de trás do jogador
+        if (currentDistance >= endDistance)
+        {
+            pulseActive = false;
+            // opcional: limpar completamente
+            Shader.SetGlobalFloat("_PulseFade", 0f);
+            Shader.SetGlobalFloat("_PulseDistance", 0f);
+        }
     }
+
 }
