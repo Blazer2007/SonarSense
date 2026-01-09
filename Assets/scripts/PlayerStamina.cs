@@ -89,6 +89,7 @@ public class PlayerStamina : MonoBehaviour
         if (staminaBar != null)
         {
             staminaBar.value = currentStamina;
+
             if (staminaBar.value < 60 && staminaBar.value > 30)
                 staminaBar.fillRect.GetComponent<Image>().color = Color.yellow;
             else if (staminaBar.value <= 30)

@@ -82,7 +82,7 @@ public class PlayerHealth : MonoBehaviour
         if (healthBar != null)
         {
             healthBar.value = currentHealth;
-            healthBar.fillRect.GetComponent<Image>().color = Color.Lerp(Color.red, Color.green, currentHealth / maxHealth);
+            healthBar.fillRect.GetComponent<Image>().color = Color.Lerp(Color.black, Color.red, currentHealth / maxHealth);
         }
     }
 }
