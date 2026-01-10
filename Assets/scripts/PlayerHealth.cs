@@ -1,6 +1,6 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;   // se fores mostrar a barra aqui
+using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -8,14 +8,15 @@ public class PlayerHealth : MonoBehaviour
     public float maxHealth = 100f;
     public float currentHealth;
 
-    public float regen = 10f;
+    public float regen = 3f;
     private float regenDelay = 3f;
 
     [Header("Movimento / Referências")]
     public PlayerController playerController;
-    public Slider healthBar;               // arrasta o Slider da UI da vida aqui
+    public Slider healthBar;
 
     public bool tookdamage = false;
+    public bool isdead = false;
 
     // Timestamp of last time the player took damage
     private float lastDamageTime = -Mathf.Infinity;
@@ -71,6 +72,7 @@ public class PlayerHealth : MonoBehaviour
         if (currentHealth <= 0f)
         {
             playerController.canWalk = false;
+            isdead = true;
         }
         else
         {

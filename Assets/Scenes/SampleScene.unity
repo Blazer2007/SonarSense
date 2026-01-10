@@ -4193,6 +4193,7 @@ GameObject:
   - component: {fileID: 1670313637}
   - component: {fileID: 1670313638}
   - component: {fileID: 1670313639}
+  - component: {fileID: 1670313640}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -4524,7 +4525,11 @@ MonoBehaviour:
   regenIdle: 12
   playerController: {fileID: 1670313630}
   staminaBar: {fileID: 942203188}
+  playerHealth: {fileID: 1670313638}
+  audioSource: {fileID: 1670313633}
+  coughingClip: {fileID: 8300000, guid: 4eb579f98ebe7fb43878e1b389f303fe, type: 3}
   isMoving: 0
+  coughInterval: 1
 --- !u!114 &1670313638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4543,6 +4548,7 @@ MonoBehaviour:
   playerController: {fileID: 1670313630}
   healthBar: {fileID: 194210316}
   tookdamage: 0
+  isdead: 0
 --- !u!114 &1670313639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4561,6 +4567,29 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 264
+  playerController: {fileID: 1670313630}
+--- !u!114 &1670313640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1670313624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b061542ba3862e4488394565a3d9009e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  whistleRange: 15
+  pulseSpeed: 15
+  pulseThickness: 1.2
+  cooldown: 2
+  whistleSound:
+  - {fileID: 8300000, guid: def65abbbec61c84aa1ef6c4b47ea931, type: 3}
+  - {fileID: 8300000, guid: dc2952c0976688248883a03bb79e1be6, type: 3}
+  - {fileID: 8300000, guid: 7b153d7f868799c4b82681f0445ebbb8, type: 3}
+  audioSource: {fileID: 1670313633}
+  playerStamina: {fileID: 1670313637}
   playerController: {fileID: 1670313630}
 --- !u!1 &1702526093
 GameObject:
@@ -6578,7 +6607,7 @@ MonoBehaviour:
   source: {fileID: 9005848111230538497}
   collisionClip: {fileID: 8300000, guid: f30be82e11e6ba848ac17206167d7030, type: 3}
   pickupClip: {fileID: 8300000, guid: 4eb579f98ebe7fb43878e1b389f303fe, type: 3}
-  throwClip: {fileID: 8300000, guid: 636881c11b2c86a4784c6d0dda2264ec, type: 3}
+  throwClip: {fileID: 8300000, guid: 5ed1f7e6e292ec34ca1623c548617fe4, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

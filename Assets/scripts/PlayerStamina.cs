@@ -15,8 +15,16 @@ public class PlayerStamina : MonoBehaviour
     [Header("Movimento / Referências")]
     public PlayerController playerController;
     public Slider staminaBar;               // arrasta o Slider da UI aqui
+    public PlayerHealth playerHealth;
 
+    public AudioSource audioSource;
+    public AudioClip coughingClip;
     public bool isMoving;
+
+    // Tempo do último som de tosse
+    private float lastCoughTime = -Mathf.Infinity;
+    // Intervalo mínimo entre tosse em segundos
+    public float coughInterval = 2f;
 
     void Start()
     {
@@ -62,13 +70,24 @@ public class PlayerStamina : MonoBehaviour
         }
     }
 
-    void SpendStamina(float amount)
+    public void SpendStamina(float amount)
     {
         currentStamina = Mathf.Max(0, currentStamina - amount);
         // limitar velocidade se stamina <= 0
         if (currentStamina <= 0f)
         {
             playerController.canWalk = false;
+            playerHealth.TakeDamage(5f * Time.deltaTime); // perder vida quando stamina esgotada
+
+            // Toca o som de tosse no máximo uma vez por coughInterval segundos
+            if (audioSource != null && coughingClip != null)
+            {
+                if (Time.time >= lastCoughTime + coughInterval)
+                {
+                    audioSource.PlayOneShot(coughingClip);
+                    lastCoughTime = Time.time;
+                }
+            }
         }
         else
         {

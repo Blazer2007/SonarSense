@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour
     Rigidbody rb;
     float footstepTimer = 0f;
     public bool canplay = true;
+    private PlayerHealth playerHealth;
 
     void Awake()
     {
@@ -53,6 +54,9 @@ public class PlayerController : MonoBehaviour
 
         if (playerEcho == null)
             playerEcho = GetComponent<PlayerEchoSounds>();
+
+        if(playerHealth == null)
+            playerHealth = GetComponent<PlayerHealth>();
     }
 
     void Start()
@@ -67,7 +71,6 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        
         Vector3 targetPos = isCrouching ? headCrouchLocalPos : headOriginalLocalPos;
 
         // move suavemente a cabeça/câmara
