@@ -24,13 +24,11 @@ public class EchoWhistle : MonoBehaviour
     [SerializeField] private PlayerStamina playerStamina;
     [SerializeField] private PlayerController playerController;
 
-    // Shuffled play order
     private List<int> playOrder = new List<int>();
     private int playIndex = 0;
 
     void Start()
     {
-        // Ensure we have an AudioSource
         if (audioSource == null)
         {
             audioSource = GetComponent<AudioSource>();
@@ -38,14 +36,13 @@ public class EchoWhistle : MonoBehaviour
                 audioSource = gameObject.AddComponent<AudioSource>();
         }
 
-        // Prepare shuffled order
         if (whistleSound != null && whistleSound.Length > 0)
             ShufflePlayOrder();
     }
 
     void Update()
     {
-        // Assobio por tecla (W ou espaço) - para testes
+        // Assobio por tecla Q
         if (Input.GetKeyDown(KeyCode.Q) && !playerController.isFatigued)
         {
             Whistle();
@@ -56,7 +53,6 @@ public class EchoWhistle : MonoBehaviour
         currentDistance += Time.deltaTime * pulseSpeed;
         Shader.SetGlobalFloat("_PulseDistance", currentDistance);
 
-        // Fade out igual ao EchoPulse original
         float distToEdge = whistleRange + 15f; // buffer
         float fadeStart = distToEdge - 10f;
         float fade = 1f;
@@ -83,7 +79,6 @@ public class EchoWhistle : MonoBehaviour
         // Som do assobio - toca o próximo clip na ordem embaralhada
         if (whistleSound != null && whistleSound.Length > 0 && audioSource != null)
         {
-            // Ensure playOrder is valid
             if (playOrder == null || playOrder.Count != whistleSound.Length)
                 ShufflePlayOrder();
 
@@ -92,7 +87,7 @@ public class EchoWhistle : MonoBehaviour
 
             playIndex++;
             if (playIndex >= playOrder.Count)
-                ShufflePlayOrder(); // reshuffle when exhausted
+                ShufflePlayOrder();
         }
 
         // Inicia o pulso do centro do jogador

@@ -4527,9 +4527,12 @@ MonoBehaviour:
   staminaBar: {fileID: 942203188}
   playerHealth: {fileID: 1670313638}
   audioSource: {fileID: 1670313633}
-  coughingClip: {fileID: 8300000, guid: 4eb579f98ebe7fb43878e1b389f303fe, type: 3}
+  coughingClip:
+  - {fileID: 8300000, guid: f9c34167f1574374b8859e9bf1eb65b0, type: 3}
+  - {fileID: 8300000, guid: 87ea018a42df99b4880b38e4bd68431b, type: 3}
+  - {fileID: 8300000, guid: 694793a6651542845b510d9b3aa615d6, type: 3}
   isMoving: 0
-  coughInterval: 1
+  coughInterval: 2.5
 --- !u!114 &1670313638
 MonoBehaviour:
   m_ObjectHideFlags: 0

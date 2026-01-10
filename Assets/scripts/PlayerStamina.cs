@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;   // se fores mostrar a barra aqui
 
@@ -18,13 +21,17 @@ public class PlayerStamina : MonoBehaviour
     public PlayerHealth playerHealth;
 
     public AudioSource audioSource;
-    public AudioClip coughingClip;
+    public AudioClip[] coughingClip;
+
+    private List<int> playOrder = new List<int>();
+    private int playIndex = 0;
+
     public bool isMoving;
 
     // Tempo do último som de tosse
     private float lastCoughTime = -Mathf.Infinity;
     // Intervalo mínimo entre tosse em segundos
-    public float coughInterval = 2f;
+    public float coughInterval = 2.5f;
 
     void Start()
     {
@@ -35,6 +42,28 @@ public class PlayerStamina : MonoBehaviour
             staminaBar.maxValue = maxStamina;
             staminaBar.value = currentStamina;
         }
+        if (audioSource == null)
+        {
+            audioSource = GetComponent<AudioSource>();
+            if (audioSource == null)
+                audioSource = gameObject.AddComponent<AudioSource>();
+        }
+
+        if (coughingClip != null && coughingClip.Length > 0)
+            ShufflePlayOrder();
+    }
+    private void ShufflePlayOrder()
+    {
+        playOrder = Enumerable.Range(0, coughingClip.Length).ToList();
+        
+        for (int i = playOrder.Count - 1; i > 0; i--)
+        {
+            int j = Random.Range(0, i + 1);
+            int tmp = playOrder[i];
+            playOrder[i] = playOrder[j];
+            playOrder[j] = tmp;
+        }
+        playIndex = 0;
     }
 
     void Update()
@@ -79,14 +108,9 @@ public class PlayerStamina : MonoBehaviour
             playerController.canWalk = false;
             playerHealth.TakeDamage(5f * Time.deltaTime); // perder vida quando stamina esgotada
 
-            // Toca o som de tosse no máximo uma vez por coughInterval segundos
-            if (audioSource != null && coughingClip != null)
+            if (currentStamina <= 0)
             {
-                if (Time.time >= lastCoughTime + coughInterval)
-                {
-                    audioSource.PlayOneShot(coughingClip);
-                    lastCoughTime = Time.time;
-                }
+                Cough();
             }
         }
         else
@@ -102,7 +126,25 @@ public class PlayerStamina : MonoBehaviour
             }
         }
     }
+    public void Cough()
+    {
+        if (Time.time < lastCoughTime + coughInterval) return;
 
+        // Tossir - toca o próximo clip na ordem embaralhada
+        if (coughingClip != null && coughingClip.Length > 0 && audioSource != null)
+        {
+            if (playOrder == null || playOrder.Count != coughingClip.Length)
+                ShufflePlayOrder();
+
+            AudioClip clip = coughingClip[playOrder[playIndex]];
+            audioSource.PlayOneShot(clip);
+
+            playIndex++;
+            if (playIndex >= playOrder.Count)
+                ShufflePlayOrder();
+        }
+        lastCoughTime = Time.time;
+    }
     void UpdateUI()
     {
         if (staminaBar != null)

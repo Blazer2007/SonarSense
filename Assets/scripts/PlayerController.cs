@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Footsteps / Echo")]
     public AudioSource footstepsSource;     // AudioSource com o clip longo dos passos (Loop ON, PlayOnAwake OFF)
-    public PlayerEchoSounds playerEcho;   // script de eco ligado ao mesmo objeto / mesma fonte
+    public PlayerSounds playerSounds;   // script de eco ligado ao mesmo objeto / mesma fonte
     public PlayerFootsteps footsteps;      // script que avisa a IA
     public float footstepInterval = 0.35f; // intervalo para eventos de eco para a IA
 
@@ -52,8 +52,8 @@ public class PlayerController : MonoBehaviour
         if (footstepsSource == null)
             footstepsSource = GetComponent<AudioSource>();
 
-        if (playerEcho == null)
-            playerEcho = GetComponent<PlayerEchoSounds>();
+        if (playerSounds == null)
+            playerSounds = GetComponent<PlayerSounds>();
 
         if(playerHealth == null)
             playerHealth = GetComponent<PlayerHealth>();
@@ -138,10 +138,10 @@ public class PlayerController : MonoBehaviour
         }
 
         // Eco (andar->parar)
-        if (playerEcho != null && canplay)
+        if (playerSounds != null && canplay)
         {
             //Se parar de andar, avisar o script de eco para iniciar o eco
-            playerEcho.UpdatePlayingState(isMoving);
+            playerSounds.UpdatePlayingState(isMoving);
         }
 
         if (isGrounded && Input.GetButtonDown("Jump"))
