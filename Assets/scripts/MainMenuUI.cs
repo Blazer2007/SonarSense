@@ -12,7 +12,7 @@ public class MainMenuUI : MonoBehaviour
     }
     public void OnStartButton()
     {
-        SceneManager.LoadScene(gameSceneName);
+        SceneTransition.Instance.TransitionToScene(gameSceneName);
     }
 
     public void OnOptionsButton()

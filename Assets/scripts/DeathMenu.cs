@@ -26,8 +26,7 @@ public class DeathMenu : MonoBehaviour
     {
         Time.timeScale = 1f;
         Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-        SceneManager.LoadScene(currentSceneName);
+        SceneTransition.Instance.TransitionToScene(currentSceneName);
     }
 
     public void OnMainMenuButton()
@@ -35,7 +34,7 @@ public class DeathMenu : MonoBehaviour
         Time.timeScale = 1f;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-        SceneManager.LoadScene(mainMenuSceneName);
+        SceneTransition.Instance.TransitionToScene(mainMenuSceneName);
     }
 
     public void OnExitButton()
