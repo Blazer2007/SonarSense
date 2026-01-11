@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
     [Header("Camera")]
     public Camera cam; // camara do jogador
 
-    [Header("Footsteps / Echo")]
+    [Header("Footsteps")]
     public AudioSource footstepsSource;     // AudioSource com o clip longo dos passos (Loop ON, PlayOnAwake OFF)
     public PlayerSounds playerSounds;   // script de eco ligado ao mesmo objeto / mesma fonte
     public PlayerFootsteps footsteps;      // script que avisa a IA
@@ -135,6 +135,8 @@ public class PlayerController : MonoBehaviour
         else
         {
             footstepTimer = 0f;
+            if (footstepsSource != null && footstepsSource.isPlaying)
+                footstepsSource.Stop();
         }
 
         // Eco (andar->parar)

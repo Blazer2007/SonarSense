@@ -5,6 +5,11 @@ public class MainMenuUI : MonoBehaviour
 {
     [SerializeField] private string gameSceneName = "Game";
 
+    public void Start()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
     public void OnStartButton()
     {
         SceneManager.LoadScene(gameSceneName);

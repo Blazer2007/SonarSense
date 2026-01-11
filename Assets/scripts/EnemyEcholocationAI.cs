@@ -16,7 +16,9 @@ public class EnemyEcholocationAI : MonoBehaviour
 
     [Header("Hearing")]
     public float collisionHearingRadius = 20f;
-    public float footstepHearingRadius = 8f;
+    public float footstepHearingRadius = 10f;
+    public float whistleHearingRadius = 10f;
+    public float playerDetectionRadius = 5f;
 
     [Header("Enemy Attack")]
     public float damage = 20f;
@@ -158,5 +160,18 @@ public class EnemyEcholocationAI : MonoBehaviour
 
             player = soundSource;
             state = EnemyState.ChasePlayer;
+    }
+    public void HearWhistle(Vector3 soundPos, Transform soundSource)
+    {
+        if (Vector3.Distance(transform.position, soundPos) > whistleHearingRadius)
+            return;
+
+        player = soundSource;
+        if(Vector3.Distance(transform.position, soundPos) > playerDetectionRadius) 
+        {
+            state = EnemyState.InvestigateSound;
+            enemy.SetDestination(soundPos);
+        }
+        else state = EnemyState.ChasePlayer;
     }
 }

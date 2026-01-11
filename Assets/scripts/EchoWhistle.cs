@@ -15,14 +15,18 @@ public class EchoWhistle : MonoBehaviour
     [Header("Audio")]
     public AudioClip[] whistleSound;
     public AudioSource audioSource; // Fonte de áudio usada para tocar os clips
+    public float whistleVolume = 1f;
 
     private float currentDistance = 0f;
     private Vector3 pulseOrigin;
     private bool pulseActive = false;
     private float lastWhistleTime = 0f;
+    public bool canwhistle = true;
 
     [SerializeField] private PlayerStamina playerStamina;
-    [SerializeField] private PlayerController playerController;
+    [SerializeField] private EnemyEcholocationAI ai;
+
+    [SerializeField] private LayerMask enemyLayerMask;
 
     private List<int> playOrder = new List<int>();
     private int playIndex = 0;
@@ -43,7 +47,7 @@ public class EchoWhistle : MonoBehaviour
     void Update()
     {
         // Assobio por tecla Q
-        if (Input.GetKeyDown(KeyCode.Q) && !playerController.isFatigued)
+        if (Input.GetKeyDown(KeyCode.Q) && canwhistle)
         {
             Whistle();
         }
@@ -88,6 +92,16 @@ public class EchoWhistle : MonoBehaviour
             playIndex++;
             if (playIndex >= playOrder.Count)
                 ShufflePlayOrder();
+
+            // Notificar inimigos próximos
+            Vector3 pos = transform.position;
+            Collider[] hits = Physics.OverlapSphere(pos, whistleRange, enemyLayerMask);
+            foreach (var hit in hits)
+            {
+                var ai = hit.GetComponent<EnemyEcholocationAI>();
+                if (ai != null)
+                    ai.HearWhistle(pos, transform);
+            }
         }
 
         // Inicia o pulso do centro do jogador
@@ -101,7 +115,7 @@ public class EchoWhistle : MonoBehaviour
         pulseActive = true;
         lastWhistleTime = Time.time;
 
-        playerStamina.SpendStamina(10f); // Assobiar custa 10 de stamina 
+        playerStamina.SpendStamina(5f); // Assobiar custa 10 de stamina 
     }
 
     private void ShufflePlayOrder()

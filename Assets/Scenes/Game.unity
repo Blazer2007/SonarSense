@@ -633,7 +633,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &165430825
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4161,7 +4161,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1000070076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4638,6 +4638,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5568371526223589888, guid: 33611a8ea9d7a4a41af1583dc6c641d3, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: -2577548232221058511, guid: 33611a8ea9d7a4a41af1583dc6c641d3, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.35533378
@@ -4879,6 +4883,8 @@ MonoBehaviour:
   wanderInterval: 3
   collisionHearingRadius: 20
   footstepHearingRadius: 8
+  whistleHearingRadius: 8
+  playerDetectionRadius: 3
   damage: 20
   attackSpeed: 1
   losePlayerDistance: 10
@@ -5088,7 +5094,9 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 28e365e4ea1923647b79324bf9aa792c, type: 2}
   - {fileID: 2100000, guid: 8b4d4e1415a2fab44838b0975bd2fdd6, type: 2}
   - {fileID: 2100000, guid: b50c07cf0a612c547983d9b96e134637, type: 2}
-  iswasActive: 0
+  playerStamina: {fileID: 1670313637}
+  isActive: 0
+  wasActive: 0
 --- !u!1 &1218817283
 GameObject:
   m_ObjectHideFlags: 0
@@ -6338,7 +6346,7 @@ MonoBehaviour:
   isMoving: 0
   cam: {fileID: 330585545}
   footstepsSource: {fileID: 1670313633}
-  playerSounds: {fileID: 0}
+  playerSounds: {fileID: 1670313636}
   footsteps: {fileID: 1670313634}
   footstepInterval: 0
   canplay: 0
@@ -6389,6 +6397,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   pickupHint: {fileID: 4392459755781631395}
+  canThrow: 1
+  playerStamina: {fileID: 1670313637}
 --- !u!82 &1670313633
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6526,12 +6536,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxStamina: 100
   currentStamina: 0
-  costPerStep: 0.5
+  lastStamina: 0
+  costPerStep: 0.3
   regenCrouch: 7.5
   regenIdle: 12
   playerController: {fileID: 1670313630}
   staminaBar: {fileID: 942203188}
   playerHealth: {fileID: 1670313638}
+  whistle: {fileID: 1670313640}
+  pickUpThrow: {fileID: 1670313632}
   audioSource: {fileID: 1670313633}
   coughingClip:
   - {fileID: 8300000, guid: f9c34167f1574374b8859e9bf1eb65b0, type: 3}
@@ -6556,6 +6569,7 @@ MonoBehaviour:
   regen: 10
   playerController: {fileID: 1670313630}
   healthBar: {fileID: 194210316}
+  deathMenu: {fileID: 1722683839}
   tookdamage: 0
   isdead: 0
 --- !u!114 &1670313639
@@ -6598,8 +6612,13 @@ MonoBehaviour:
   - {fileID: 8300000, guid: dc2952c0976688248883a03bb79e1be6, type: 3}
   - {fileID: 8300000, guid: 7b153d7f868799c4b82681f0445ebbb8, type: 3}
   audioSource: {fileID: 1670313633}
+  whistleVolume: 0
+  canwhistle: 1
   playerStamina: {fileID: 1670313637}
-  playerController: {fileID: 1670313630}
+  ai: {fileID: 1171858237}
+  enemyLayerMask:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!1 &1702526093
 GameObject:
   m_ObjectHideFlags: 0

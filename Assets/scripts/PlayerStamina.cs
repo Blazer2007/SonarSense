@@ -9,6 +9,7 @@ public class PlayerStamina : MonoBehaviour
     [Header("Valores de Stamina")]
     public float maxStamina = 100f;
     public float currentStamina;
+    public float lastStamina;
 
     [Header("Custos / Regeneração")]
     public float costPerStep = 0.3f;          // custo de stamina ao andar
@@ -19,6 +20,8 @@ public class PlayerStamina : MonoBehaviour
     public PlayerController playerController;
     public Slider staminaBar;               // arrasta o Slider da UI aqui
     public PlayerHealth playerHealth;
+    [SerializeField] EchoWhistle whistle;
+    [SerializeField] PickUpThrow pickUpThrow;
 
     public AudioSource audioSource;
     public AudioClip[] coughingClip;
@@ -71,6 +74,19 @@ public class PlayerStamina : MonoBehaviour
         HandleMovementStamina();
         HandleRegen();
         UpdateUI();
+
+        if (currentStamina < maxStamina * 0.2f) // menos de 20% de stamina
+        {
+            playerController.isFatigued = true;
+            whistle.canwhistle = false;
+            pickUpThrow.canThrow = false;
+        }
+        else
+        {
+            playerController.isFatigued = false;
+            whistle.canwhistle = true;
+            pickUpThrow.canThrow = true;
+        }
     }
 
     void HandleMovementStamina()
@@ -91,6 +107,7 @@ public class PlayerStamina : MonoBehaviour
         {
             // parado: regenera mais rápido
             currentStamina = Mathf.Min(maxStamina, currentStamina + regenIdle * Time.deltaTime);
+            lastStamina = currentStamina;
         }
         else if (isCrouching)
         {
@@ -116,14 +133,6 @@ public class PlayerStamina : MonoBehaviour
         else
         {
             playerController.canWalk = true;
-            if (currentStamina < maxStamina * 0.2f) // menos de 20% de stamina
-            {
-                playerController.isFatigued = true;
-            }
-            else
-            {
-                playerController.isFatigued = false;
-            }
         }
     }
     public void Cough()

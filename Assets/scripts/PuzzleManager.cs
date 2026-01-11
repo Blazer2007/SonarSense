@@ -16,7 +16,10 @@ public class PuzzleManager : MonoBehaviour
     public Canvas canvas;
     public Material[] wireMaterials;       // mesmo tamanho que frequencies
 
-    public bool iswasActive = false;
+    [SerializeField] private PlayerStamina playerStamina;
+
+    public bool isActive = false;
+    public bool wasActive = false;
 
     void Start()
     {
@@ -41,14 +44,19 @@ public class PuzzleManager : MonoBehaviour
     }
     public void Update()
     {
-        if (iswasActive) 
+        if (isActive && !wasActive)
         {
+            playerStamina.currentStamina = playerStamina.lastStamina;
             PlayerController.isMoving = false;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            PlayerController.moveSpeed = 0f;
+            PlayerController.canplay = false;
         }
     }
     public void StartPuzzle()
     {
-        iswasActive = true;
+        isActive = true;
 
         PlayerController.moveSpeed = 0f;
         PlayerController.jumpForce = 0f;
@@ -93,6 +101,9 @@ public class PuzzleManager : MonoBehaviour
 
     public void OnPuzzleComplete()
     {
+        isActive = false; 
+        wasActive = true;
+
         game3DCamera.Priority = 10;
         Puzzlecam.Priority = 0;
 

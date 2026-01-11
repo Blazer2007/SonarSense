@@ -8,7 +8,9 @@ public class PickUpThrow : MonoBehaviour
     public float throwForce = 10f;    // Força do lançamento
     public LayerMask pickupLayer;
     public GameObject pickupHint; // texto/ícone de “pegar”
+    public bool canThrow = true;
     Transform currentTarget;
+    [SerializeField] private PlayerStamina playerStamina;
 
     //ATUALIZAÇÃO FUTURA: RAIO DE PEGA MAIOR
     Rigidbody heldRb;
@@ -33,7 +35,7 @@ public class PickUpThrow : MonoBehaviour
         }
 
         // Atirar com a tecla T
-        if (heldRb != null && Input.GetKeyDown(KeyCode.T))
+        if (heldRb != null && Input.GetKeyDown(KeyCode.T) && canThrow)
         {
             Throw();
         }
@@ -96,6 +98,8 @@ public class PickUpThrow : MonoBehaviour
         heldRb.AddForce(cam.transform.forward * throwForce, ForceMode.Impulse);
 
         heldRb = null;
+
+        playerStamina.SpendStamina(10f); // Reduz a stamina do jogador ao lançar um objeto
 
     }
 
