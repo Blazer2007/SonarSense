@@ -14,6 +14,7 @@ public class PlayerHealth : MonoBehaviour
     [Header("Movimento / Referências")]
     public PlayerController playerController;
     public Slider healthBar;
+    public DeathMenu deathMenu;
 
     public bool tookdamage = false;
     public bool isdead = false;
@@ -73,11 +74,16 @@ public class PlayerHealth : MonoBehaviour
         {
             playerController.canWalk = false;
             isdead = true;
+            Die();
         }
         else
         {
             playerController.canWalk = true;
         }
+    }
+    public void Die()
+    {
+        deathMenu.ShowDeathMenu();
     }
     void UpdateUI()
     {

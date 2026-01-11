@@ -20,6 +20,7 @@ public class PuzzleManager : MonoBehaviour
 
     void Start()
     {
+        Cursor.lockState = CursorLockMode.None;
         // Frequências únicas para os slots
         List<int> slotFreqs = new List<int>(frequencies);
         slotFreqs.Shuffle();

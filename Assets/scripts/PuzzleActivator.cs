@@ -8,6 +8,9 @@ public class PuzzleActivator : MonoBehaviour
         // se o puzzle já foi ativo, não permite que se faça o puzzle novamente
         if (manager.iswasActive) return;
         else // caso contrário, inicia o puzzle
-            manager.StartPuzzle();
+        { 
+            manager.StartPuzzle(); 
+            Cursor.lockState = CursorLockMode.None;
+        }
     }
 }
