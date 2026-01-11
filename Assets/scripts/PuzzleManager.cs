@@ -17,6 +17,7 @@ public class PuzzleManager : MonoBehaviour
     public Material[] wireMaterials;       // mesmo tamanho que frequencies
 
     [SerializeField] private PlayerStamina playerStamina;
+    [SerializeField] private Animator animator;
 
     public bool isActive = false;
     public bool wasActive = false;
@@ -38,8 +39,6 @@ public class PuzzleManager : MonoBehaviour
             slot.targetFrequency = freq;
             int matIndex = System.Array.IndexOf(frequencies, freq);
             slot.slotImage.material = wireMaterials[matIndex];
-
-            Debug.Log("Frequência do slot atribuída: " + freq);
         }
     }
     public void Update()
@@ -93,14 +92,14 @@ public class PuzzleManager : MonoBehaviour
 
                 wireDrag.line.material = mat;
                 wireDrag.GetComponentInChildren<Image>().material = mat;
-
-                Debug.Log("Frequência do fio atribuída: " + freq);
             }
         }
     }
 
     public void OnPuzzleComplete()
     {
+        animator.SetBool("canOpen", true);
+
         isActive = false; 
         wasActive = true;
 
