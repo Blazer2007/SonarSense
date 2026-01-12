@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class PuzzleManager : MonoBehaviour
 {
+    public bool puzzledoor = false;
     public CinemachineCamera Puzzlecam;
     public CinemachineCamera game3DCamera;
     public GameObject[] wirePrefabs;
@@ -102,6 +103,7 @@ public class PuzzleManager : MonoBehaviour
 
         isActive = false; 
         wasActive = true;
+        puzzledoor = true;
 
         game3DCamera.Priority = 10;
         Puzzlecam.Priority = 0;
