@@ -47,17 +47,22 @@ public class PauseMenu : MonoBehaviour
     {
         Time.timeScale = 1f;
         SceneTransition.Instance.TransitionToScene("Game");
+
         Cursor.lockState = CursorLockMode.Locked;
     }
     public void OnOptionsButton()
     {
         Debug.Log("Pause Options");
         Cursor.lockState = CursorLockMode.None; 
-        Cursor.visible = false;
+        Cursor.visible = true;
     }
 
     public void OnExitButton()
     {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
         Application.Quit();
+#endif
     }
 }

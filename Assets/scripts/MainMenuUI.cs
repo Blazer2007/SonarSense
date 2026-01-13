@@ -40,7 +40,11 @@ public class MainMenuUI : MonoBehaviour
 
     public void OnExitButton()
     {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
         Application.Quit();
+#endif
     }
 
     public void changeMasterVol()
