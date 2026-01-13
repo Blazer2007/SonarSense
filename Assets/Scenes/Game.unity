@@ -26969,6 +26969,7 @@ MonoBehaviour:
   regen: 7.5
   CrouchCost: 3.5
   playerController: {fileID: 1670313630}
+  playerStamina: {fileID: 0}
   stressBar: {fileID: 1329968970}
   playerHealth: {fileID: 1670313638}
   audioSource: {fileID: 1670313633}

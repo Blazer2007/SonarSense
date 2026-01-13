@@ -25,7 +25,9 @@ public class PlayerStress : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip stressedClip;
 
-    private TextMeshPro stressText;
+    private float stressdelay = 2f;
+    private float lastStressIncrement = -Mathf.Infinity;
+
     private bool isMoving;
 
     void Start()
@@ -43,7 +45,6 @@ public class PlayerStress : MonoBehaviour
             if (audioSource == null)
                 audioSource = gameObject.AddComponent<AudioSource>();
         }
-        stressText = stressBar.GetComponentInChildren<TextMeshPro>();
     }
 
     void Update()
@@ -64,10 +65,9 @@ public class PlayerStress : MonoBehaviour
 
     void HandleStress()
     {
-        if (playerController.isCrouching && playerStamina.currentStamina >= 20)
+        if (playerController.isCrouching)
         {
             Stress(CrouchCost * Time.deltaTime * 10);
-            stressText.ignoreVisibility = false;
         }
     }
 
@@ -90,7 +90,8 @@ public class PlayerStress : MonoBehaviour
         if (currentStress >= 100f)
         {
             playerController.canWalk = false;
-            playerHealth.TakeDamage(5f * Time.deltaTime); // perder vida quando stamina esgotada
+            if (playerStamina.currentStamina >= 20)
+            playerHealth.TakeDamage(5f * Time.deltaTime);
 
             if (currentStress > 0)
             {
