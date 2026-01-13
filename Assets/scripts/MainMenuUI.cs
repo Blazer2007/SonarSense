@@ -16,7 +16,7 @@ public class MainMenuUI : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
-        // Começar no nível atual
+        // Comecar no nivel atual
         Debug.Log("Start do MainMenuUI");
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;

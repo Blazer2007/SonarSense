@@ -5,10 +5,10 @@ public class PlayerEchoSteps : MonoBehaviour
     [Header("Prefab do passo")]
     public GameObject echoPrefab;
 
-    [Header("Configuração 3D")]
+    [Header("Configuracao 3D")]
     public float distanceBetweenSteps = 0.5f;
     public float yOffset = -0.1f;  // ligeiramente debaixo do jogador
-    public LayerMask groundLayer = 1;  // Layer do chão para raycast
+    public LayerMask groundLayer = 1;  // Layer do chao para raycast
 
     private Vector3 lastStepPosition;
     [SerializeField] private PlayerController playerController;
@@ -30,13 +30,13 @@ public class PlayerEchoSteps : MonoBehaviour
 
     void SpawnStep3D()
     {
-        // Raycast para chão real (evita spawnar no ar)
+        // Raycast para chao real (evita spawnar no ar)
         RaycastHit hit;
-        Vector3 spawnPos = transform.position + Vector3.up * 1f; // Começa um pouco acima
+        Vector3 spawnPos = transform.position + Vector3.up * 1f; // Comeca um pouco acima
 
         if (Physics.Raycast(transform.position + Vector3.up * 1f, Vector3.down, out hit, 3f, groundLayer))
         {
-            spawnPos = hit.point + Vector3.up * 0.01f; // Logo acima do chão
+            spawnPos = hit.point + Vector3.up * 0.01f; // Logo acima do chao
         }
         else
         {
@@ -44,7 +44,7 @@ public class PlayerEchoSteps : MonoBehaviour
         }
         if(playerController.isCrouching)
         {
-            echoPrefab.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.13f); // Mais transparente ao agachar(faz menos barulho por isso não faz tanto brilho)
+            echoPrefab.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.13f); // Mais transparente ao agachar(faz menos barulho por isso nao faz tanto brilho)
         }
         else echoPrefab.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.3f); // Normal
             

@@ -2,6 +2,8 @@
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
+using UnityEngine.Video;
+
 
 enum EnemyState { Wander, InvestigateSound, ChasePlayer , AttackPlayer}
 
@@ -33,7 +35,9 @@ public class EnemyEcholocationAI : MonoBehaviour
 
     public PlayerHealth playerHealth;
     bool canAttack = true;
-
+    [SerializeField] public AudioSource attackSound;
+    [Header("Attack Video")]
+    [SerializeField] private VideoPlayer attackVideo;
 
     void Start()
     {
@@ -107,6 +111,7 @@ public class EnemyEcholocationAI : MonoBehaviour
                 break;
             case EnemyState.AttackPlayer:
                 // Deal Damage
+                
                 AttackPlayer(damage);
                 break;
         }
@@ -115,17 +120,28 @@ public class EnemyEcholocationAI : MonoBehaviour
     {
         yield return new WaitForSeconds(attackSpeed);
         canAttack = true;
+        attackVideo.Stop();
     }
     void AttackPlayer(float damage) 
     {
         if (!canAttack) return;
-        else { 
-            canAttack = false; 
-            playerHealth.TakeDamage(damage);
-        }
-        
 
-        StartCoroutine(WaitToAttack());
+            canAttack = false;
+
+  
+    
+    
+    // Deal damage
+    playerHealth.TakeDamage(damage);
+
+    StartCoroutine(WaitToAttack());
+    attackSound.Play();
+    if (!attackVideo.isPlaying)
+{
+    attackVideo.Play();
+}
+    
+    
     }
     void SetRandomDestination()
     {

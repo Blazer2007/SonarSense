@@ -4,16 +4,16 @@ using UnityEngine;
 public class SoundEmitter : MonoBehaviour
 {
     private bool triggered = false;
-    private bool inHand   = false;   // está atualmente na mão do jogador?
+    private bool inHand   = false;   // esta atualmente na mao do jogador?
     public ObjectSounds objectSounds;
 
 
     void OnCollisionEnter(Collision collision)
     {
-        // se está na mão, ignorar TODAS as colisões
+        // se esta na mao, ignorar TODAS as colisoes
         if (inHand) return;
 
-        // se já emitiu neste lançamento, não emitir outra vez
+        // se ja emitiu neste lancamento, nao emitir outra vez
         if (triggered) return;
 
         triggered = true;
@@ -36,7 +36,7 @@ public class SoundEmitter : MonoBehaviour
     public void OnThrown()
     {
         inHand = false;
-        // triggered continua false até à primeira colisão depois do lançamento
+        // triggered continua false ate a primeira colisao depois do lancamento
         objectSounds.PlayThrowSound();
     }
 }

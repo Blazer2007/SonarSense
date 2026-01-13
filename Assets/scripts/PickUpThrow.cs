@@ -2,22 +2,22 @@ using UnityEngine;
 
 public class PickUpThrow : MonoBehaviour
 {
-    public Camera cam;                // Câmara do jogador
-    public Transform holdPoint;       // Empty à frente da câmara
-    public float detectDistance = 3f; // Distância máxima para apanhar
-    public float throwForce = 10f;    // Força do lançamento
+    public Camera cam;                // Camara do jogador
+    public Transform holdPoint;       // Empty a frente da camara
+    public float detectDistance = 3f; // Distancia maxima para apanhar
+    public float throwForce = 10f;    // Forca do lancamento
     public LayerMask pickupLayer;
-    public GameObject pickupHint; // texto/ícone de “pegar”
+    public GameObject pickupHint; // texto/icone de pegar
     public bool canThrow = true;
     Transform currentTarget;
     [SerializeField] private PlayerStamina playerStamina;
 
-    //ATUALIZAÇÃO FUTURA: RAIO DE PEGA MAIOR
+    //ATUALIZACAO FUTURA: RAIO DE PEGA MAIOR
     Rigidbody heldRb;
 
     void Update()
     {
-        DetectPickup(); // raycast só para ver se há algo à frente e mostrar a dica
+        DetectPickup(); // raycast so para ver se ha algo a frente e mostrar a dica
 
         // Apanhar / largar com tecla E
         if (Input.GetKeyDown(KeyCode.E))
@@ -28,7 +28,7 @@ public class PickUpThrow : MonoBehaviour
                 Drop();
         }
 
-        // Manter o objeto na mão
+        // Manter o objeto na mao
         if (heldRb != null)
         {
             heldRb.MovePosition(holdPoint.position);
@@ -99,7 +99,7 @@ public class PickUpThrow : MonoBehaviour
 
         heldRb = null;
 
-        playerStamina.SpendStamina(10f); // Reduz a stamina do jogador ao lançar um objeto
+        playerStamina.SpendStamina(10f); // Reduz a stamina do jogador ao lancar um objeto
 
     }
 

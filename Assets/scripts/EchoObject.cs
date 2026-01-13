@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EchoObject : MonoBehaviour
 {
-    public float fadeDuration = 1.5f; // Duração das outlines dos objetos a desvanecerem
+    public float fadeDuration = 1.5f; // Duracao das outlines dos objetos a desvanecerem
 
     private Renderer rend; // renderer do objeto
     private MaterialPropertyBlock block; 
@@ -22,7 +22,7 @@ public class EchoObject : MonoBehaviour
         float pulseDistance = Shader.GetGlobalFloat("_PulseDistance");
         float pulseThickness = Shader.GetGlobalFloat("_PulseThickness");
 
-        // Distância ao centro do pulso
+        // Distancia ao centro do pulso
         float dist = Vector3.Distance(transform.position, pulseOrigin);
 
         // O anel tocou neste objeto?
@@ -31,11 +31,11 @@ public class EchoObject : MonoBehaviour
             lastHitTime = Time.time;
         }
 
-        // Cálculo da visibilidade temporária
+        // Calculo da visibilidade temporaria
         float elapsed = Time.time - lastHitTime;
         float visibility = Mathf.Clamp01(1f - (elapsed / fadeDuration));
 
-        // Aplicar ao material da instância
+        // Aplicar ao material da instancia
         rend.GetPropertyBlock(block);
         block.SetFloat("_EchoVisibility", visibility);
         rend.SetPropertyBlock(block);

@@ -12,17 +12,17 @@ public class PlayerStress : MonoBehaviour
     public float currentStress;
     public float lastStress;
 
-    [Header("Custos / Regeneração")]
-    public float regen = 20f;          // Regeneração de stress ao andar
+    [Header("Custos / Regeneracao")]
+    public float regen = 20f;          // Regeneracao de stress ao andar
     public float CrouchCost = 0.5f;          // por segundo, agachado
 
     [Header("Stress Progressivo")]
     public float safeCrouchTime = 3f;    // tempo seguro em segundos
     public float baseCrouchCost = 0.5f;  // custo inicial
-    public float maxCrouchCost = 3f;     // custo máximo
-    public float crouchEscalationRate = 1f; // quão rápido o custo aumenta
+    public float maxCrouchCost = 3f;     // custo mï¿½ximo
+    public float crouchEscalationRate = 1f; // quï¿½o rï¿½pido o custo aumenta
 
-    private float crouchTime;            // quanto tempo seguido está agachado
+    private float crouchTime;            // quanto tempo seguido estï¿½ agachado
 
     [Header("Stun")]
     public float stunDuration = 2f;
@@ -30,7 +30,7 @@ public class PlayerStress : MonoBehaviour
     private bool isStunned;
     private float stunTimer;
 
-    [Header("Movimento / Referências")]
+    [Header("Movimento / Referencias")]
     public PlayerController playerController;
     public PlayerStamina playerStamina;
     public Slider stressBar;               // arrasta o Slider da UI aqui
@@ -112,7 +112,7 @@ public class PlayerStress : MonoBehaviour
 
         if (currentStress >= maxStress && !isStunned)
         {
-            // força levantar
+            // forï¿½a levantar
 
             playerController.isCrouching = false;
             playerController.canCrouch = false;
@@ -127,7 +127,7 @@ public class PlayerStress : MonoBehaviour
             
             if (shake != null)
             {
-                shake.TriggerShake(1.5f, stunDuration);  // shake médio por 2 segundos
+                shake.TriggerShake(1.5f, stunDuration);  // shake mï¿½dio por 2 segundos
             }
         }
     }

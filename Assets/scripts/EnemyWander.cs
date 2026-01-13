@@ -3,7 +3,7 @@ using UnityEngine.AI;
 
 public class EnemyWander : MonoBehaviour
 {
-    public float wanderRadius = 10f;      // raio máximo à volta do inimigo
+    public float wanderRadius = 10f;      // raio maximo a volta do inimigo
     public float wanderInterval = 3f;     // tempo entre escolhas de novo destino
 
     NavMeshAgent agent;
@@ -37,7 +37,7 @@ public class EnemyWander : MonoBehaviour
 
     void SetRandomDestination()
     {
-        // ponto aleatório numa esfera à volta do inimigo
+        // ponto aleatario numa esfera a volta do inimigo
         Vector3 randomDir = Random.insideUnitSphere * wanderRadius;
         randomDir += transform.position;
 

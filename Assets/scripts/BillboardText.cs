@@ -10,14 +10,14 @@ public class BillboardText : MonoBehaviour
     {
         if (cam == null || target == null) return;
 
-        // 1) Posição sempre acima do objeto na MESMA altura
+        // 1) Posicao sempre acima do objeto na MESMA altura
         Vector3 pos = target.position;
         pos.y += heightOffset;
         transform.position = pos;
 
-        // 2) Rotação: olha para a câmara, mas só no plano horizontal
+        // 2) Rotacao: olha para a camara, mas so no plano horizontal
         Vector3 dir = transform.position - cam.transform.position;
-        dir.y = 0f; // impede inclinação para cima/baixo
+        dir.y = 0f; // impede inclinacao para cima/baixo
 
         if (dir.sqrMagnitude < 0.0001f) return;
 

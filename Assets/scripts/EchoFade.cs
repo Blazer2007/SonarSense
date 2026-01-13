@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EchoFade : MonoBehaviour
 {
-    public float lifetime = 1.5f;      // tempo até desaparecer completamente
+    public float lifetime = 1.5f;      // tempo ate desaparecer completamente
     private SpriteRenderer sr;
     private float timeElapsed = 0f;
     private Color startColor;
@@ -18,7 +18,7 @@ public class EchoFade : MonoBehaviour
         timeElapsed += Time.deltaTime;
         float t = timeElapsed / lifetime;
 
-        // Lerp do alpha de valor inicial até 0
+        // Lerp do alpha de valor inicial ate 0
         Color c = startColor;
         c.a = Mathf.Lerp(startColor.a, 0f, t);
         sr.color = c;
