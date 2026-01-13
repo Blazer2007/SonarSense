@@ -4,7 +4,10 @@
 public class PlayerController : MonoBehaviour
 {
     [Header("Stealth / Crouch")]
-    public bool isCrouching = false; // pode agachar-se?
+    public bool isCrouching = false; // está agachado?
+    public bool isStressed = false;
+    public bool isFatigued = false;
+    public bool isMoving = false;
     public float crouchSpeedMultiplier = 0.4f; // andar devagar
     public KeyCode crouchKey = KeyCode.LeftControl; // tecla para agachamento
     public Transform playerHead;          // a tua camera ou objeto "Head"
@@ -12,6 +15,17 @@ public class PlayerController : MonoBehaviour
     public float headMoveSpeed = 8f;       // velocidade do movimento
     private Vector3 headOriginalLocalPos;
     private Vector3 headCrouchLocalPos;
+    
+    public float baseNoise = 1f;
+    public float maxExtraNoise = 3f;
+    public float noiseLevel; // lido pelos inimigos
+
+    [Header("Stun System")]
+    public bool canWalk = true;
+    public bool canCrouch = true; // pode agachar-se?
+    public bool isStunned = false;
+    public float stunTimer = 0f;
+    public float slowSpeedMultiplier = 0.3f;  // velocidade reduzida durante stun
 
     [Header("Movement")]
     public float moveSpeed = 5f; // velocidade de movimento
@@ -23,10 +37,6 @@ public class PlayerController : MonoBehaviour
     public LayerMask groundLayer; // camada do chão
     public float inputX; // entrada horizontal
     public float inputZ; // entrada vertical
-    public bool canWalk = true;
-    public bool isFatigued = false;
-    public bool isMoving = false;
-    public bool isStressed = false;
 
     [Header("Camera")]
     public Camera cam; // camara do jogador
@@ -64,37 +74,32 @@ public class PlayerController : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
 
-            // guarda a posição original da cabeça/câmara em espaço local
-            headOriginalLocalPos = playerHead.localPosition;
-            headCrouchLocalPos = headOriginalLocalPos + new Vector3(0f, headCrouchOffset, 0f);
+        // guarda a posição original da cabeça/câmara em espaço local
+        headOriginalLocalPos = playerHead.localPosition;
+        headCrouchLocalPos = headOriginalLocalPos + new Vector3(0f, headCrouchOffset, 0f);
 
     }
 
     void Update()
     {
-        Vector3 targetPos = isCrouching ? headCrouchLocalPos : headOriginalLocalPos;
-
-        // move suavemente a cabeça/câmara
-        playerHead.localPosition = Vector3.Lerp(
-            playerHead.localPosition,
-            targetPos,
-            headMoveSpeed * Time.deltaTime
-        );
+        if (isStunned)
+        {
+            HandleSlowMovement(); // movimento lento durante stun
+            stunTimer -= Time.deltaTime;
+            if (stunTimer <= 0f)
+            {
+                isStunned = false;
+                canWalk = true;
+                canCrouch = true;
+            }
+            // ainda processa input básico da câmara, mas sem movimento
+            UpdateCameraHead();
+            return; // SAI CEDO - ignora todo o resto
+        }
 
         float dt = Time.deltaTime;
         inputX = Input.GetAxis("Horizontal");
         inputZ = Input.GetAxis("Vertical");
-
-        Vector3 camForward = cam.transform.forward;
-        camForward.y = 0f;
-        camForward.Normalize();
-
-        Vector3 camRight = cam.transform.right;
-        camRight.y = 0f;
-        camRight.Normalize();
-
-        Vector3 moveDir = camForward * inputZ + camRight * inputX;
-        if (moveDir.sqrMagnitude > 1f) moveDir.Normalize();
 
         if (isFatigued) 
         {
@@ -110,47 +115,97 @@ public class PlayerController : MonoBehaviour
         }
         else moveSpeed = 10f;
 
-
-        float currentSpeed = isCrouching ? moveSpeed * (crouchSpeedMultiplier = isFatigued ? 1 : crouchSpeedMultiplier)  : moveSpeed;
-        
-        Vector3 move = moveDir * currentSpeed * dt;
-        transform.Translate(move, Space.World);
-        
-        isMoving = moveDir.sqrMagnitude > 0.001f && isGrounded && !isCrouching;
-
-        // SOM DE PASSOS (fonte principal, loop)
-        if (isMoving)
-        {
-            if (footstepsSource != null && !footstepsSource.isPlaying && canplay)
-                footstepsSource.Play();
-
-            footstepTimer += dt;
-            if (footstepTimer >= footstepInterval)
-            {
-                if (footsteps != null && canplay)
-                    footsteps.PlayFootstep();
-
-                footstepTimer = 0f;
-            }
-        }
-        else
-        {
-            footstepTimer = 0f;
-            if (footstepsSource != null && footstepsSource.isPlaying)
-                footstepsSource.Stop();
-        }
-
-        // Eco (andar->parar)
-        if (playerSounds != null && canplay)
-        {
-            //Se parar de andar, avisar o script de eco para iniciar o eco
-            playerSounds.UpdatePlayingState(isMoving);
-        }
-
         if (isGrounded && Input.GetButtonDown("Jump"))
             Jump();
 
-        isCrouching = Input.GetKey(crouchKey);
+        if (canCrouch)
+        {
+            isCrouching = Input.GetKey(crouchKey);
+        }
+        else
+        {
+            isCrouching = false; // força a levantar durante stun/recuperação
+        }
+        if (canWalk)
+        {
+            HandleMovement();
+        }
+        UpdateCameraHead();
+        HandleFootsteps();
+        HandleSounds();
+    }
+    void HandleSounds()
+    {
+        if (playerSounds != null && canplay)
+            playerSounds.UpdatePlayingState(isMoving);
+    }
+    void HandleFootsteps()
+    {
+        if (isStunned || !isMoving)
+        {
+            if (footstepsSource != null && footstepsSource.isPlaying)
+                footstepsSource.Stop();
+            footstepTimer = 0f;
+            return;
+        }
+
+        if (footstepsSource != null && !footstepsSource.isPlaying && canplay)
+            footstepsSource.Play();
+
+        footstepTimer += Time.deltaTime;
+        if (footstepTimer >= footstepInterval)
+        {
+            if (footsteps != null && canplay)
+                footsteps.PlayFootstep();
+            footstepTimer = 0f;
+        }
+    }
+    void HandleSlowMovement()
+    {
+        inputX = Input.GetAxis("Horizontal") * 0.2f;
+        inputZ = Input.GetAxis("Vertical") * 0.2f;
+
+        Vector3 camForward = cam.transform.forward;
+        camForward.y = 0f; camForward.Normalize();
+        Vector3 camRight = cam.transform.right;
+        camRight.y = 0f; camRight.Normalize();
+
+        Vector3 moveDir = camForward * inputZ + camRight * inputX;
+        float panicSpeed = moveSpeed * slowSpeedMultiplier * 0.5f; // extra lento
+        if (isCrouching) panicSpeed *= 0.7f;
+
+        Vector3 move = moveDir * panicSpeed * Time.deltaTime;
+        transform.Translate(move, Space.World);
+
+        isMoving = false; // sem footsteps durante stun
+    }
+    void HandleMovement()
+    {
+        Vector3 camForward = cam.transform.forward;
+        camForward.y = 0f; camForward.Normalize();
+        Vector3 camRight = cam.transform.right;
+        camRight.y = 0f; camRight.Normalize();
+
+        Vector3 moveDir = camForward * inputZ + camRight * inputX;
+        if (moveDir.sqrMagnitude > 1f) moveDir.Normalize();
+
+        float currentMoveSpeed = moveSpeed;
+        if (isFatigued)
+        {
+            currentMoveSpeed *= fatigueSpeedPenalty;
+            if (currentMoveSpeed < 3f) currentMoveSpeed = 3f;
+        }
+        if (isCrouching) currentMoveSpeed *= crouchSpeedMultiplier;
+
+        Vector3 move = moveDir * currentMoveSpeed * Time.deltaTime;
+        transform.Translate(move, Space.World);
+
+        isMoving = moveDir.sqrMagnitude > 0.001f && isGrounded && !isCrouching;
+    }
+    void UpdateCameraHead()
+    {
+        Vector3 targetPos = isCrouching ? headCrouchLocalPos : headOriginalLocalPos;
+        playerHead.localPosition = Vector3.Lerp(playerHead.localPosition, targetPos, headMoveSpeed * Time.deltaTime);
     }
 
     void FixedUpdate()
