@@ -1,14 +1,8 @@
 fileFormatVersion: 2
-:Assets/Scenes/Game/NavMesh-EnemyPath.asset.meta
 guid: 178334f77a12ed848934dc7072f2496d
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 23800000
-guid: c9833357cd2d84441989b1dec859ac01
-NativeFormatImporter:
-  externalObjects: {}
-  mainObjectFileID: 0
-  :Assets/Materials/TargetShape.mat.meta
   userData: 
   assetBundleName: 
   assetBundleVariant: 
