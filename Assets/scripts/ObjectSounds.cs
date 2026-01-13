@@ -4,8 +4,8 @@ using UnityEngine;
 public class ObjectSounds : MonoBehaviour
 {
     [Header("Audio")]
-    public AudioSource source; // fonte de áudio principal
-    public AudioClip collisionClip; // som de colisão
+    public AudioSource source; // fonte de audio principal
+    public AudioClip collisionClip; // som de colisao
     public AudioClip pickupClip;
     public AudioClip throwClip;
 

@@ -1,15 +1,17 @@
 using UnityEngine;
 
 /*
- * Esta script cria uma onda de som desde o ponto onde um objeto cai(se estiver dentro do campo de audição do jogador) e que vai até ao jogador para mostrar o mapa.
- * Será utilizada pelo objeto EchoController para ter uma maneira global de detetar os objetos e ativar as suas scripts respetivamente.
+ Esta script cria uma onda de som desde o ponto onde um objeto cai(se estiver dentro 
+ do campo de audicao do jogador) e que vai ate ao jogador para mostrar o mapa.
+ Sera utilizada pelo objeto EchoController para ter uma maneira global de detetar os 
+ objetos e ativar as suas scripts respetivamente.
 */
 public class EchoPulse : MonoBehaviour
 {
 
     [Header("Player Hearing")]
     public Transform player; // Jogador
-    public float hearingRange = 20f; // Alcance da audição
+    public float hearingRange = 20f; // Alcance da audicao
 
     [Header("Pulse Settings")]
     public float pulseSpeed = 20f; // Velocidade da onda de som
@@ -17,25 +19,25 @@ public class EchoPulse : MonoBehaviour
 
     private float currentDistance = 0f; // Distancia da onda de som
     private Vector3 pulseOrigin; // Origem da onda de som
-    private bool pulseActive = false; // Verificação da ativação da onda de som
+    private bool pulseActive = false; // Verificacao da ativacao da onda de som
 
     void Start()
     {
 
     }
 
-    public void StartPulse(Vector3 position) // Metodo que cria da onda de som apartir do ponto de colisão entre o objeto e o mapa
+    public void StartPulse(Vector3 position) // Metodo que cria da onda de som apartir do ponto de colisao entre o objeto e o mapa
     {
 
-        pulseOrigin = position; // Posição de colisão dos objetos
+        pulseOrigin = position; // Posicao de colisao dos objetos
 
-        Shader.SetGlobalVector("_PulseOrigin", pulseOrigin); // Atribuição da variavel anterior à propriedade "_PulseOrigin" do gráfico de shaders
-        Shader.SetGlobalFloat("_PulseDistance", 0f); // Atribuição do valor 0 à distancia da onda de som(reset da distância no gráfico de shaders)
+        Shader.SetGlobalVector("_PulseOrigin", pulseOrigin); // Atribuicao da variavel anterior a propriedade "_PulseOrigin" do grafico de shaders
+        Shader.SetGlobalFloat("_PulseDistance", 0f); // Atribuicao do valor 0 a distancia da onda de som(reset da distancia no grafico de shaders)
         Shader.SetGlobalFloat("_PulseTime", Time.time);
         Shader.SetGlobalFloat("_PulseThickness", pulseThickness);
 
         currentDistance = 0f; // Reset da distancia da onda de som
-        pulseActive = true; // Afirmar que a onda de som já foi criada
+        pulseActive = true; // Afirmar que a onda de som ja foi criada
     }
 
     void Update()
@@ -48,13 +50,13 @@ public class EchoPulse : MonoBehaviour
         float distToPlayer = Vector3.Distance(pulseOrigin, player.position);
         float maxDistance = Mathf.Max(hearingRange, distToPlayer);
 
-        float stopBuffer = 20f;              // já tens
+        float stopBuffer = 20f;              // ja tens
         float fadeDistance = 10f;            // largura da zona de fade no fim
 
         float endDistance = maxDistance + stopBuffer;
         float fadeStart = endDistance - fadeDistance;
 
-        // 1 até começar a zona de fade, depois desce até 0
+        // 1 ate comecar a zona de fade, depois desce ate 0
         float fade = 1f;
         if (currentDistance >= fadeStart)
         {

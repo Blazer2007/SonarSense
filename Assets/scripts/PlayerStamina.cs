@@ -11,12 +11,12 @@ public class PlayerStamina : MonoBehaviour
     public float currentStamina;
     public float lastStamina;
 
-    [Header("Custos / Regeneração")]
+    [Header("Custos / Regeneracao")]
     public float costPerStep = 0.3f;          // custo de stamina ao andar
     public float regenCrouch = 7.5f;          // por segundo, agachado
-    public float regenIdle = 12f;           // por segundo, parado de pé
+    public float regenIdle = 12f;           // por segundo, parado de pe
 
-    [Header("Movimento / Referências")]
+    [Header("Movimento / Referencias")]
     public PlayerController playerController;
     public Slider staminaBar;               // arrasta o Slider da UI aqui
     public PlayerHealth playerHealth;
@@ -31,9 +31,9 @@ public class PlayerStamina : MonoBehaviour
 
     public bool isMoving;
 
-    // Tempo do último som de tosse
+    // Tempo do ultimo som de tosse
     private float lastCoughTime = -Mathf.Infinity;
-    // Intervalo mínimo entre tosse em segundos
+    // Intervalo minimo entre tosse em segundos
     public float coughInterval = 2.5f;
 
     void Start()
@@ -105,7 +105,7 @@ public class PlayerStamina : MonoBehaviour
 
         if (!isMoving)
         {
-            // parado: regenera mais rápido
+            // parado: regenera mais rapido
             currentStamina = Mathf.Min(maxStamina, currentStamina + regenIdle * Time.deltaTime);
             lastStamina = currentStamina;
         }
@@ -139,7 +139,7 @@ public class PlayerStamina : MonoBehaviour
     {
         if (Time.time < lastCoughTime + coughInterval) return;
 
-        // Tossir - toca o próximo clip na ordem embaralhada
+        // Tossir - toca o proximo clip na ordem embaralhada
         if (coughingClip != null && coughingClip.Length > 0 && audioSource != null)
         {
             if (playOrder == null || playOrder.Count != coughingClip.Length)

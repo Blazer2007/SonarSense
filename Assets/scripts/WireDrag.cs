@@ -4,13 +4,13 @@ using UnityEngine.EventSystems;
 
 public class WireDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-    public float frequency; // Frequência do fio
-    public bool isConnected = false; // Verifica se o fio está conectado a um slot
+    public float frequency; // Frequencia do fio
+    public bool isConnected = false; // Verifica se o fio esta conectado a um slot
     public bool isDragging = false;
     public bool starteddragging = false;
-    private Vector3 startPos; // Posição inicial do fio
-    private RectTransform rectTransform; // Referência ao RectTransform do fio
-    private Canvas canvas; // Referência ao Canvas pai
+    private Vector3 startPos; // Posicao inicial do fio
+    private RectTransform rectTransform; // Referencia ao RectTransform do fio
+    private Canvas canvas; // Referencia ao Canvas pai
     private CanvasGroup canvasGroup; // Para controlar a interatividade durante o drag
     public LineRenderer line; // Linha para esticar o fio
     public Transform fixedEnd; // Inicio fixo do fio
@@ -34,8 +34,8 @@ public class WireDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (isConnected) return; // não permite arrastar se já estiver conectado
-        startPos = rectTransform.position;// Salva a posição inicial
+        if (isConnected) return; // nao permite arrastar se ja estiver conectado
+        startPos = rectTransform.position;// Salva a posicao inicial
         canvasGroup.blocksRaycasts = false;  // Permite drag suave
         isDragging = true;
         starteddragging = true;
@@ -45,18 +45,18 @@ public class WireDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     public void OnDrag(PointerEventData eventData)
     {
         if (isConnected) return;
-        RectTransform parentRect = rectTransform.parent as RectTransform; // Obtém o RectTransform do pai(canvas)
+        RectTransform parentRect = rectTransform.parent as RectTransform; // Obtem o RectTransform do pai(canvas)
         if (parentRect == null)
         {
             parentRect = canvas.transform as RectTransform; // se o pai for nulo, tenta usar o transform do canvas
             if (parentRect == null)
             {
-                rectTransform.anchoredPosition += eventData.delta / Mathf.Max(1f, canvas.scaleFactor); // se for nulo, a posição do fio é utilizada diretamente
+                rectTransform.anchoredPosition += eventData.delta / Mathf.Max(1f, canvas.scaleFactor); // se for nulo, a posicao do fio e utilizada diretamente
                 return;
             }
         }
 
-        // Escolhe a câmera correta: de preferencia a câmera do evento(puzzle_cam), senão a do canvas
+        // Escolhe a camera correta: de preferencia a camera do evento(puzzle_cam), senao a do canvas
         Camera cam = eventData.pressEventCamera != null ? eventData.pressEventCamera : (canvas.renderMode == RenderMode.ScreenSpaceOverlay ? null : canvas.worldCamera);
 
         if (canvas.renderMode == RenderMode.WorldSpace) // mexer o fio em 3D
@@ -64,17 +64,17 @@ public class WireDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             Vector3 worldPoint;
 
             // bool que verifica se o ponteiro foi convertido para o mundo 3D corretamente
-            bool okWorld = RectTransformUtility.ScreenPointToWorldPointInRectangle(parentRect /*Rect transform atribuído anteriormente*/, 
-                                                                                   eventData.position /* posição do ponteiro em pixels (screen space).*/, 
+            bool okWorld = RectTransformUtility.ScreenPointToWorldPointInRectangle(parentRect /*Rect transform atribuï¿½do anteriormente*/, 
+                                                                                   eventData.position /* posiï¿½ï¿½o do ponteiro em pixels (screen space).*/, 
                                                                                    cam /*Camara atual*/, 
-                                                                                   out worldPoint /*posição no mundo 3D*/); 
+                                                                                   out worldPoint /*posiï¿½ï¿½o no mundo 3D*/); 
 
-            if (okWorld) // se a conversão do ponteiro para o mundo 3D foi bem sucedida
+            if (okWorld) // se a conversï¿½o do ponteiro para o mundo 3D foi bem sucedida
             {
-                rectTransform.position = worldPoint; // posiciona o fio na posição do mundo convertida
+                rectTransform.position = worldPoint; // posiciona o fio na posiï¿½ï¿½o do mundo convertida
                 line.SetPosition(1, rectTransform.position); // Atualiza a ponta da linha para seguir o fio
             }
-            else // se a conversão falhou
+            else // se a conversï¿½o falhou
             {
                 rectTransform.anchoredPosition += eventData.delta / Mathf.Max(1f, canvas.scaleFactor); // move o fio baseado no ponteiro
                 line.SetPosition(1, rectTransform.position); // Atualiza a ponta da linha para seguir o fio
@@ -85,15 +85,15 @@ public class WireDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             // ScreenSpaceOverlay e ScreenSpaceCamera: trabalhar com coordenadas locais do pai(canvas)
             Vector2 localPoint;
 
-            // Mesma logica de conversão do ponteiro, mas em vez de ser em 3D , é em 2D local
-            bool okLocal = RectTransformUtility.ScreenPointToLocalPointInRectangle(parentRect, eventData.position, cam, out localPoint /*Posição local*/);
+            // Mesma logica de conversï¿½o do ponteiro, mas em vez de ser em 3D , ï¿½ em 2D local
+            bool okLocal = RectTransformUtility.ScreenPointToLocalPointInRectangle(parentRect, eventData.position, cam, out localPoint /*Posiï¿½ï¿½o local*/);
             
-            if (okLocal) // se a conversão foi bem sucedida
+            if (okLocal) // se a conversï¿½o foi bem sucedida
             {
-                // Define a posição do fio para a posição local convertida
+                // Define a posiï¿½ï¿½o do fio para a posiï¿½ï¿½o local convertida
                 rectTransform.anchoredPosition = localPoint;
 
-                // Mantém o fio dentro dos limites do pai(canvas)
+                // Mantï¿½m o fio dentro dos limites do pai(canvas)
                 Rect parentRectArea = parentRect.rect;
                 Vector2 min = parentRectArea.min;
                 Vector2 max = parentRectArea.max;
@@ -103,7 +103,7 @@ public class WireDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                 rectTransform.anchoredPosition = anchored;
                 line.SetPosition(1, rectTransform.position); // Atualiza a ponta da linha para seguir o fio
             }
-            else // se a conversão falhou
+            else // se a conversï¿½o falhou
             {
                 rectTransform.anchoredPosition += eventData.delta / Mathf.Max(1f, canvas.scaleFactor); // move o fio baseado no ponteiro
                 line.SetPosition(1, rectTransform.position); // Atualiza a ponta da linha para seguir o fio
@@ -118,10 +118,10 @@ public class WireDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
         isDragging = false;
 
-        // Se não estiver conectado a um slot
+        // Se nï¿½o estiver conectado a um slot
         if (!isConnected)
         {
-            // Volta à posição inicial se não encaixou
+            // Volta ï¿½ posiï¿½ï¿½o inicial se nï¿½o encaixou
             rectTransform.anchoredPosition = startPos;
             line.SetPosition(1, rectTransform.position);
         }
@@ -129,7 +129,7 @@ public class WireDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     }
     public void SnapToSlot(Vector3 slotPosition)
     {
-        // Encaixa o fio na posição do slot
+        // Encaixa o fio na posiï¿½ï¿½o do slot
         rectTransform.position = slotPosition;
         // Marca o fio como conectado
         isConnected = true;

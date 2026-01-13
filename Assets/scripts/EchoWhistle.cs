@@ -14,7 +14,7 @@ public class EchoWhistle : MonoBehaviour
 
     [Header("Audio")]
     public AudioClip[] whistleSound;
-    public AudioSource audioSource; // Fonte de áudio usada para tocar os clips
+    public AudioSource audioSource; // Fonte de audio usada para tocar os clips
     public float whistleVolume = 1f;
 
     private float currentDistance = 0f;
@@ -80,7 +80,7 @@ public class EchoWhistle : MonoBehaviour
     {
         if (Time.time < lastWhistleTime + cooldown) return;
 
-        // Som do assobio - toca o próximo clip na ordem embaralhada
+        // Som do assobio - toca o proximo clip na ordem embaralhada
         if (whistleSound != null && whistleSound.Length > 0 && audioSource != null)
         {
             if (playOrder == null || playOrder.Count != whistleSound.Length)
@@ -93,7 +93,7 @@ public class EchoWhistle : MonoBehaviour
             if (playIndex >= playOrder.Count)
                 ShufflePlayOrder();
 
-            // Notificar inimigos próximos
+            // Notificar inimigos proximos
             Vector3 pos = transform.position;
             Collider[] hits = Physics.OverlapSphere(pos, whistleRange, enemyLayerMask);
             foreach (var hit in hits)

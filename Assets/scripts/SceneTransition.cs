@@ -42,7 +42,7 @@ public class SceneTransition : MonoBehaviour
     {
         if (fadeCanvasGroup == null) yield break;
 
-        fadeCanvasGroup.alpha = 0f; // Começa preto
+        fadeCanvasGroup.alpha = 0f; // Comeca preto
 
         float t = 0f;
         while (t < fadeDuration)

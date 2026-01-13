@@ -12,11 +12,11 @@ public class PlayerStress : MonoBehaviour
     public float currentStress;
     public float lastStress;
 
-    [Header("Custos / Regenera��o")]
+    [Header("Custos / Regeneracao")]
     public float regen = 20f;          // Regeneracao de stress ao andar
     public float CrouchCost = 0.5f;          // por segundo, agachado
 
-    [Header("Movimento / Refer�ncias")]
+    [Header("Movimento / Referencias")]
     public PlayerController playerController;
     public PlayerStamina playerStamina;
     public Slider stressBar;               // arrasta o Slider da UI aqui

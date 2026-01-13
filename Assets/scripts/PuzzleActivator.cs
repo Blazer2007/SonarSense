@@ -5,9 +5,9 @@ public class PuzzleActivator : MonoBehaviour
     public PuzzleManager manager;
     void OnMouseDown()
     {
-        // se o puzzle já foi ativo, não permite que se faça o puzzle novamente
+        // se o puzzle ja foi ativo, nao permite que se faca o puzzle novamente
         if (manager.wasActive) return;
-        else // caso contrário, inicia o puzzle
+        else // caso contrario, inicia o puzzle
         { 
             manager.StartPuzzle(); 
             Cursor.lockState = CursorLockMode.None;

@@ -11,7 +11,7 @@ public class PlayerHealth : MonoBehaviour
     public float regen = 3f;
     private float regenDelay = 3f;
 
-    [Header("Movimento / Referências")]
+    [Header("Movimento / Referencias")]
     public PlayerController playerController;
     public Slider healthBar;
     public DeathMenu deathMenu;
@@ -47,7 +47,7 @@ public class PlayerHealth : MonoBehaviour
     {
         if (currentHealth > 0)
         {
-            // Só regenar se já passou regenDelay desde a última vez que tomou dano
+            // Se regenar se ja passou regenDelay desde a ultima vez que tomou dano
             if (Time.time - lastDamageTime >= regenDelay)
             {
                 PassiveRegen();
@@ -65,7 +65,7 @@ public class PlayerHealth : MonoBehaviour
     public void TakeDamage(float damage)
     {
         currentHealth = Mathf.Max(0, currentHealth - damage);
-        // registrar a hora do dano para atrasar a regeneração
+        // registrar a hora do dano para atrasar a regeneracao
         lastDamageTime = Time.time;
         tookdamage = true;
 
