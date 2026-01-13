@@ -55,7 +55,7 @@ public class SceneTransition : MonoBehaviour
     }
 
     private IEnumerator FadeOutAndLoad(string sceneName)
-    {   
+    {
         if (fadeCanvasGroup == null)
         {
             Time.timeScale = 1f;

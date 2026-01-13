@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     public bool canWalk = true;
     public bool isFatigued = false;
     public bool isMoving = false;
+    public bool isStressed = false;
 
     [Header("Camera")]
     public Camera cam; // camara do jogador
