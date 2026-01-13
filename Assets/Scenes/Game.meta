@@ -1,21 +1,14 @@
 fileFormatVersion: 2
-<<<<<<< Updated upstream
-<<<<<<<< Updated upstream:Assets/Scenes/Game.meta
-=======
->>>>>>> Stashed changes
+:Assets/Scenes/Game.meta
 guid: 778c7b60ba28a474ca2613af153d7568
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
-<<<<<<< Updated upstream
-========
 guid: beffb55c6f6db6b419ae4ed9c9ab0106
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 0
->>>>>>>> Stashed changes:Assets/Materials/PlayerTable.mat.meta
-=======
->>>>>>> Stashed changes
+Stashed changes:Assets/Materials/PlayerTable.mat.meta
   userData: 
   assetBundleName: 
   assetBundleVariant: 

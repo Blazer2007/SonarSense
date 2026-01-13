@@ -3797,13 +3797,12 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-<<<<<<< Updated upstream
   m_AnchoredPosition: {x: 0, y: 15}
   m_SizeDelta: {x: 244, y: 56.04}
-=======
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 50}
->>>>>>> Stashed changes
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 50}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &253878592
 MonoBehaviour:
@@ -3854,25 +3853,23 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-<<<<<<< Updated upstream
   m_fontSize: 34
   m_fontSizeBase: 34
-=======
   m_fontSize: 24
   m_fontSizeBase: 24
->>>>>>> Stashed changes
+  m_fontSize: 24
+  m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-<<<<<<< Updated upstream
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
-=======
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
->>>>>>> Stashed changes
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -3902,11 +3899,9 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-<<<<<<< Updated upstream
   m_margin: {x: -5.970703, y: 0, z: 0, w: 25.46336}
-=======
   m_margin: {x: -5.970703, y: 0, z: 0, w: 0}
->>>>>>> Stashed changes
+  m_margin: {x: -5.970703, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -5745,11 +5740,11 @@ RectTransform:
   m_GameObject: {fileID: 360228614}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-<<<<<<< Updated upstream
   m_LocalScale: {x: 0.6, y: 0.3, z: 1}
-=======
   m_LocalScale: {x: 0.9, y: 0.3, z: 1}
->>>>>>> Stashed changes
+
+  m_LocalScale: {x: 0.9, y: 0.3, z: 1}
+
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 942203187}
@@ -8147,8 +8142,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
-<<<<<<< Updated upstream
-=======
 --- !u!1 &572578973
 GameObject:
   m_ObjectHideFlags: 0
@@ -8258,7 +8251,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
->>>>>>> Stashed changes
 --- !u!1 &574282967
 GameObject:
   m_ObjectHideFlags: 0
@@ -8919,8 +8911,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 593537256}
   m_CullTransparentMesh: 1
-<<<<<<< Updated upstream
-=======
 --- !u!1 &597215329
 GameObject:
   m_ObjectHideFlags: 0
@@ -9030,7 +9020,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
->>>>>>> Stashed changes
 --- !u!1001 &597404132
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9555,11 +9544,10 @@ AudioSource:
   m_GameObject: {fileID: 620170339}
   m_Enabled: 1
   serializedVersion: 4
-<<<<<<< Updated upstream
   OutputAudioMixerGroup: {fileID: 0}
-=======
   OutputAudioMixerGroup: {fileID: 6554510668759470384, guid: a55bafcff723a6442ac4bdc10164a35a, type: 2}
->>>>>>> Stashed changes
+  OutputAudioMixerGroup: {fileID: 6554510668759470384, guid: a55bafcff723a6442ac4bdc10164a35a, type: 2}
+
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
@@ -10586,11 +10574,9 @@ AudioSource:
   m_GameObject: {fileID: 675292466}
   m_Enabled: 1
   serializedVersion: 4
-<<<<<<< Updated upstream
   OutputAudioMixerGroup: {fileID: 0}
-=======
   OutputAudioMixerGroup: {fileID: 6554510668759470384, guid: a55bafcff723a6442ac4bdc10164a35a, type: 2}
->>>>>>> Stashed changes
+  OutputAudioMixerGroup: {fileID: 6554510668759470384, guid: a55bafcff723a6442ac4bdc10164a35a, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
@@ -10896,11 +10882,9 @@ RectTransform:
   m_GameObject: {fileID: 687076587}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-<<<<<<< Updated upstream
   m_LocalScale: {x: 1, y: 0.5, z: 1}
-=======
   m_LocalScale: {x: 0.6, y: 0.3, z: 1}
->>>>>>> Stashed changes
+  m_LocalScale: {x: 0.6, y: 0.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1329968969}
@@ -12174,11 +12158,9 @@ AudioSource:
   m_GameObject: {fileID: 812441033}
   m_Enabled: 1
   serializedVersion: 4
-<<<<<<< Updated upstream
   OutputAudioMixerGroup: {fileID: 0}
-=======
   OutputAudioMixerGroup: {fileID: 6554510668759470384, guid: a55bafcff723a6442ac4bdc10164a35a, type: 2}
->>>>>>> Stashed changes
+  OutputAudioMixerGroup: {fileID: 6554510668759470384, guid: a55bafcff723a6442ac4bdc10164a35a, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
@@ -12984,11 +12966,10 @@ AudioSource:
   m_GameObject: {fileID: 838673998}
   m_Enabled: 1
   serializedVersion: 4
-<<<<<<< Updated upstream
   OutputAudioMixerGroup: {fileID: 0}
-=======
   OutputAudioMixerGroup: {fileID: 6554510668759470384, guid: a55bafcff723a6442ac4bdc10164a35a, type: 2}
->>>>>>> Stashed changes
+  OutputAudioMixerGroup: {fileID: 6554510668759470384, guid: a55bafcff723a6442ac4bdc10164a35a, type: 2}
+
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
@@ -13716,11 +13697,11 @@ AudioSource:
   m_GameObject: {fileID: 910383387}
   m_Enabled: 1
   serializedVersion: 4
-<<<<<<< Updated upstream
   OutputAudioMixerGroup: {fileID: 0}
-=======
   OutputAudioMixerGroup: {fileID: 6554510668759470384, guid: a55bafcff723a6442ac4bdc10164a35a, type: 2}
->>>>>>> Stashed changes
+
+  OutputAudioMixerGroup: {fileID: 6554510668759470384, guid: a55bafcff723a6442ac4bdc10164a35a, type: 2}
+
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
@@ -15106,11 +15087,11 @@ AudioSource:
   m_GameObject: {fileID: 981193227}
   m_Enabled: 1
   serializedVersion: 4
-<<<<<<< Updated upstream
   OutputAudioMixerGroup: {fileID: 0}
-=======
   OutputAudioMixerGroup: {fileID: 6554510668759470384, guid: a55bafcff723a6442ac4bdc10164a35a, type: 2}
->>>>>>> Stashed changes
+
+  OutputAudioMixerGroup: {fileID: 6554510668759470384, guid: a55bafcff723a6442ac4bdc10164a35a, type: 2}
+
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
@@ -18375,11 +18356,9 @@ AudioSource:
   m_GameObject: {fileID: 1151920560}
   m_Enabled: 1
   serializedVersion: 4
-<<<<<<< Updated upstream
   OutputAudioMixerGroup: {fileID: 0}
-=======
   OutputAudioMixerGroup: {fileID: 6554510668759470384, guid: a55bafcff723a6442ac4bdc10164a35a, type: 2}
->>>>>>> Stashed changes
+  OutputAudioMixerGroup: {fileID: 6554510668759470384, guid: a55bafcff723a6442ac4bdc10164a35a, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
@@ -19577,13 +19556,12 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 28e365e4ea1923647b79324bf9aa792c, type: 2}
   - {fileID: 2100000, guid: 8b4d4e1415a2fab44838b0975bd2fdd6, type: 2}
   - {fileID: 2100000, guid: b50c07cf0a612c547983d9b96e134637, type: 2}
-<<<<<<< Updated upstream
   playerStamina: {fileID: 1670313637}
   animator: {fileID: 1382087354}
-=======
   playerStamina: {fileID: 0}
   animator: {fileID: 0}
->>>>>>> Stashed changes
+  playerStamina: {fileID: 0}
+  animator: {fileID: 0}
   isActive: 0
   wasActive: 0
 --- !u!1001 &1193430749
@@ -20307,11 +20285,9 @@ AudioSource:
   m_GameObject: {fileID: 1252753324}
   m_Enabled: 1
   serializedVersion: 4
-<<<<<<< Updated upstream
   OutputAudioMixerGroup: {fileID: 0}
-=======
   OutputAudioMixerGroup: {fileID: 6554510668759470384, guid: a55bafcff723a6442ac4bdc10164a35a, type: 2}
->>>>>>> Stashed changes
+  OutputAudioMixerGroup: {fileID: 6554510668759470384, guid: a55bafcff723a6442ac4bdc10164a35a, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
@@ -21406,13 +21382,14 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-<<<<<<< Updated upstream
   m_AnchoredPosition: {x: -10, y: 10}
   m_SizeDelta: {x: 125, y: 125}
-=======
   m_AnchoredPosition: {x: -10, y: 0}
   m_SizeDelta: {x: 100, y: 100}
->>>>>>> Stashed changes
+
+  m_AnchoredPosition: {x: -10, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &1329968970
 MonoBehaviour:
@@ -21681,11 +21658,9 @@ AudioSource:
   m_GameObject: {fileID: 1346104102}
   m_Enabled: 1
   serializedVersion: 4
-<<<<<<< Updated upstream
   OutputAudioMixerGroup: {fileID: 0}
-=======
   OutputAudioMixerGroup: {fileID: 6554510668759470384, guid: a55bafcff723a6442ac4bdc10164a35a, type: 2}
->>>>>>> Stashed changes
+  OutputAudioMixerGroup: {fileID: 6554510668759470384, guid: a55bafcff723a6442ac4bdc10164a35a, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
@@ -26995,14 +26970,11 @@ MonoBehaviour:
   baseNoise: 1
   maxExtraNoise: 3
   noiseLevel: 0
-<<<<<<< Updated upstream
   canWalk: 0
   canCrouch: 1
   isStunned: 0
   stunTimer: 0
   slowSpeedMultiplier: 0.3
-=======
->>>>>>> Stashed changes
   moveSpeed: 10
   maxSpeed: 20
   fatigueSpeedPenalty: 0.9
@@ -27014,14 +26986,11 @@ MonoBehaviour:
     m_Bits: 256
   inputX: 0
   inputZ: 0
-<<<<<<< Updated upstream
-=======
   canWalk: 0
   isFatigued: 0
   isMoving: 0
   isStressed: 0
   canCrouch: 1
->>>>>>> Stashed changes
   cam: {fileID: 330585545}
   footstepsSource: {fileID: 1670313633}
   playerSounds: {fileID: 1670313636}
@@ -27312,33 +27281,27 @@ MonoBehaviour:
   maxStress: 100
   currentStress: 0
   lastStress: 0
-<<<<<<< Updated upstream
   regen: 7.5
   CrouchCost: 3.5
-=======
->>>>>>> Stashed changes
   safeCrouchTime: 3
   baseCrouchCost: 0.5
   maxCrouchCost: 3
   crouchEscalationRate: 1
-<<<<<<< Updated upstream
   stunDuration: 2
   forcedStandTime: 3
-=======
   regen: 7.5
   stunDuration: 2
   forcedStandTime: 2
->>>>>>> Stashed changes
+  regen: 7.5
+  stunDuration: 2
+  forcedStandTime: 2
   playerController: {fileID: 1670313630}
   playerStamina: {fileID: 1670313637}
   stressBar: {fileID: 1329968970}
   playerHealth: {fileID: 1670313638}
   audioSource: {fileID: 1670313633}
   stressedClip: {fileID: 0}
-<<<<<<< Updated upstream
   shake: {fileID: 287045396}
-=======
->>>>>>> Stashed changes
 --- !u!1001 &1687858162
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31823,11 +31786,9 @@ AudioSource:
   m_GameObject: {fileID: 2032443814}
   m_Enabled: 1
   serializedVersion: 4
-<<<<<<< Updated upstream
   OutputAudioMixerGroup: {fileID: 0}
-=======
   OutputAudioMixerGroup: {fileID: 6554510668759470384, guid: a55bafcff723a6442ac4bdc10164a35a, type: 2}
->>>>>>> Stashed changes
+  OutputAudioMixerGroup: {fileID: 6554510668759470384, guid: a55bafcff723a6442ac4bdc10164a35a, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
@@ -34355,8 +34316,7 @@ SceneRoots:
   - {fileID: 1178965119}
   - {fileID: 512413954}
   - {fileID: 934502247}
-<<<<<<< Updated upstream
-=======
   - {fileID: 572578977}
   - {fileID: 597215333}
->>>>>>> Stashed changes
+  - {fileID: 572578977}
+  - {fileID: 597215333}

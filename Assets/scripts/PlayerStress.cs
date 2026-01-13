@@ -103,6 +103,7 @@ public class PlayerStress : MonoBehaviour
         }
         if (!isCrouching && !isMoving && !isStunned)
             currentStress = Mathf.Max(0, currentStress - (regen * 0.5f) * Time.deltaTime);
+
     }
 
     public void Stress(float amount)
@@ -111,6 +112,8 @@ public class PlayerStress : MonoBehaviour
 
         if (currentStress >= maxStress && !isStunned)
         {
+            // força levantar
+
             playerController.isCrouching = false;
             playerController.canCrouch = false;
             playerController.canWalk = false;
@@ -120,6 +123,7 @@ public class PlayerStress : MonoBehaviour
 
             playerHealth.TakeDamage(10); // dano ao ficar estressado
             HeavyBreath();
+
             
             if (shake != null)
             {

@@ -1,21 +1,14 @@
 fileFormatVersion: 2
-<<<<<<< Updated upstream
-<<<<<<<< Updated upstream:Assets/Scenes/Game/NavMesh-EnemyPath.asset.meta
-=======
->>>>>>> Stashed changes
+:Assets/Scenes/Game/NavMesh-EnemyPath.asset.meta
 guid: 178334f77a12ed848934dc7072f2496d
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 23800000
-<<<<<<< Updated upstream
-========
 guid: c9833357cd2d84441989b1dec859ac01
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 0
->>>>>>>> Stashed changes:Assets/Materials/TargetShape.mat.meta
-=======
->>>>>>> Stashed changes
+  :Assets/Materials/TargetShape.mat.meta
   userData: 
   assetBundleName: 
   assetBundleVariant: 
