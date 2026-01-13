@@ -2502,7 +2502,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &165430825
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4853,7 +4853,7 @@ Transform:
   m_GameObject: {fileID: 287045386}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 46.8, y: 2.25, z: 6.1}
+  m_LocalPosition: {x: -0.8, y: 2.25, z: -1.17}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5387,7 +5387,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 46.8, y: 2.25, z: 6.1}
+  m_LocalPosition: {x: -0.8, y: 2.25, z: -1.17}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -21371,12 +21371,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   plottwistvideo: {fileID: 1314716575}
   plottwistsound: {fileID: 1314716576}
-  cam: {fileID: 0}
+  cam: {fileID: 287045394}
   detectDistance: 7
   pickupLayer:
     serializedVersion: 2
     m_Bits: 2048
-  pickupHint: {fileID: 0}
+  pickupHint: {fileID: 4392459755781631395}
+  delayBeforeScene: 3
 --- !u!328 &1314716575
 VideoPlayer:
   m_ObjectHideFlags: 0
@@ -27007,7 +27008,7 @@ Transform:
   m_GameObject: {fileID: 1670313624}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 46.8, y: 1.5, z: 6.1}
+  m_LocalPosition: {x: -0.8, y: 1.5, z: -1.17}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
