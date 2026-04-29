@@ -12,7 +12,7 @@ public class PickUpThrow : MonoBehaviour
     Transform currentTarget;
     [SerializeField] private PlayerStamina playerStamina;
 
-    //ATUALIZACAO FUTURA: RAIO DE PEGA MAIOR
+    //Raio maior
     Rigidbody heldRb;
 
     void Update()

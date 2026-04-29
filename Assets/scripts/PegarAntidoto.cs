@@ -24,15 +24,10 @@ public class PegarAntidoto : MonoBehaviour
         // Apanhar / largar com tecla E
         if (Input.GetKeyDown(KeyCode.E))
         {
-            plottwistvideo.Play();  
-            plottwistsound.Play();
-
-            WaitForSeconds(delayBeforeScene);
+            //plottwistvideo.Play();
+            //plottwistsound.Play();
 
             SceneManager.LoadScene("Credits");
-
-            
-            
         }
 
         
